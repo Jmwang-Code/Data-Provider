@@ -2,6 +2,6 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://${datasource.ip:null}:${datasource.port:3306}/${datasource.database:datart}?&allowMultiQueries=true&characterEncoding=utf-8
+    url: jdbc:mysql://${datasource.ip:null}:${datasource.port:3306}/${datasource.database:demo}?&allowMultiQueries=true&characterEncoding=utf-8&useSSL=false
     username: ${datasource.username:root}
     password: ${datasource.password:123456}
