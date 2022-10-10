@@ -55,19 +55,19 @@ public class OuterDataSourceManager extends DataSourceExecuteOptimizer implement
      * @Date 18:38 2022/10/8
      */
     public void loadDataProviderFactories() {
-        Thread.ofVirtual().start(new Runnable() {
-            @Override
-            public void run() {
-                ServiceLoader<DataProviderAbstractFactory> load = ServiceLoader.load(DataProviderAbstractFactory.class);
-                for (DataProviderAbstractFactory dataProvider : load) {
-                    try {
-                        cachedDataProviderAbstractFactories.put(dataProvider.getType(), dataProvider);
-                    } catch (IOException e) {
-                        log.error("", e);
-                    }
-                }
-            }
-        });
+//        Thread.ofVirtual().start(new Runnable() {
+//            @Override
+//            public void run() {
+//                ServiceLoader<DataProviderAbstractFactory> load = ServiceLoader.load(DataProviderAbstractFactory.class);
+//                for (DataProviderAbstractFactory dataProvider : load) {
+//                    try {
+//                        cachedDataProviderAbstractFactories.put(dataProvider.getType(), dataProvider);
+//                    } catch (IOException e) {
+//                        log.error("", e);
+//                    }
+//                }
+//            }
+//        });
     }
 
 }
