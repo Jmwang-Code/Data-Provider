@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * @author jmw
- * @Description 数据提供者基本信息
+ * @Description 配置文件 —— 数据提供者基本信息
  * @date 2022年10月09日 0:03
  * @Version 1.0
  */

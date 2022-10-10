@@ -1,9 +1,6 @@
 package com.cn.jmw.data.provider.base.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * @author jmw
@@ -16,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseBody {
+
+    public Object status;
 
     public String body;
 }

@@ -14,11 +14,14 @@ public class JdbcDataProviderAdapter implements Closeable {
     /**
      * @Author jmw
      * @Description 销毁
-     * @return void
      * @Date 18:29 2022/10/8
      */
     @Override
     public void close() throws IOException {
 
+    }
+
+    public boolean test(){
+        return true;
     }
 }

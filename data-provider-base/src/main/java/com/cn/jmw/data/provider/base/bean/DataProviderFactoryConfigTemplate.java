@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author jmw
- * @Description 数据提供程序工厂配置模板 对应 MODE-CONFIG.json文件
+ * @Description 配置文件 —— 数据提供程序工厂配置模板 对应 MODE-CONFIG.json文件
  * @date 2022年10月08日 23:41
  * @Version 1.0
  */
@@ -26,6 +26,8 @@ public class DataProviderFactoryConfigTemplate implements Serializable{
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Attribute implements Serializable {
+
+        private String code;
 
         private String name;
 

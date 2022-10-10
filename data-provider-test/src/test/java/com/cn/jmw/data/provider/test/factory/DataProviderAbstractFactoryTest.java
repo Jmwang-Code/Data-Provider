@@ -1,5 +1,6 @@
 package com.cn.jmw.data.provider.test.factory;
 
+import com.cn.jmw.data.provider.base.bean.DataProviderSource;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import com.cn.jmw.data.provider.jdbc.JdbcProvider;
 import org.junit.Test;
@@ -18,7 +19,12 @@ public class DataProviderAbstractFactoryTest {
     public void getType() throws IOException {
         String type = new DataProviderAbstractFactory() {
             @Override
-            public String getConfigJsonFile() {
+            public Object test(DataProviderSource source) throws Exception {
+                return null;
+            }
+
+            @Override
+            public String getConfigJsonFileName() {
                 return "JDBC-CONFIG.json";
             }
         }.getType();
