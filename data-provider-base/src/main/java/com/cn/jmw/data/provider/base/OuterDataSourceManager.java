@@ -55,18 +55,18 @@ public class OuterDataSourceManager extends DataSourceExecuteOptimizer implement
      * @Date 18:38 2022/10/8
      */
     public void loadDataProviderFactories() {
-//        Thread.ofVirtual().start(new Runnable() {
-//            @Override
-//            public void run() {
-//                ServiceLoader<DataProviderAbstractFactory> load = ServiceLoader.load(DataProviderAbstractFactory.class);
-//                for (DataProviderAbstractFactory dataProvider : load) {
-//                    try {
-//                        cachedDataProviderAbstractFactories.put(dataProvider.getType(), dataProvider);
-//                    } catch (IOException e) {
-//                        log.error("", e);
-//                    }
-//                }
-//            }
+//预览版本API 默认下禁用
+//        Thread.startVirtualThread(() -> {
+            //Code to execute in virtual thread
+            System.out.println("Virtual Thread");
+            ServiceLoader<DataProviderAbstractFactory> load = ServiceLoader.load(DataProviderAbstractFactory.class);
+            for (DataProviderAbstractFactory dataProvider : load) {
+                try {
+                    cachedDataProviderAbstractFactories.put(dataProvider.getType(), dataProvider);
+                } catch (IOException e) {
+                    log.error("", e);
+                }
+            }
 //        });
     }
 
