@@ -1,8 +1,7 @@
 package com.cn.jmw.data.provider.jdbc.adapter;
 
-import com.cn.jmw.data.provider.base.bean.DataProviderSource;
-import com.cn.jmw.data.provider.base.bean.JdbcDriverInfo;
-import com.cn.jmw.data.provider.base.bean.JdbcProperties;
+import com.cn.jmw.data.provider.base.entity.JdbcDriverInfo;
+import com.cn.jmw.data.provider.base.entity.JdbcProperties;
 import com.cn.jmw.data.provider.base.utils.BeanValidatorUtil;
 import com.cn.jmw.data.provider.jdbc.JdbcProvider;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +36,7 @@ public class JdbcDataProviderAdapter implements Closeable {
         try {
             this.jdbcProperties = jdbcProperties;
             this.driverInfo = driverInfo;
-            this.dataSource = JdbcProvider.getDataSourceFactory().createDataSource(jdbcProperties);
+            this.dataSource = JdbcProvider.getDataSourceConnectionPool().createDataSource(jdbcProperties);
         } catch (Exception e) {
             log.error("data provider init error", e);
         }
@@ -51,7 +50,7 @@ public class JdbcDataProviderAdapter implements Closeable {
      */
     @Override
     public void close() throws IOException {
-
+        System.out.println("shutdown");
     }
 
     public boolean test(JdbcProperties jdbcProperties){

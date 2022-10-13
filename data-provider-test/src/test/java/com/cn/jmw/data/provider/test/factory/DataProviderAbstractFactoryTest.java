@@ -1,8 +1,7 @@
 package com.cn.jmw.data.provider.test.factory;
 
-import com.cn.jmw.data.provider.base.bean.DataProviderSource;
+import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
-import com.cn.jmw.data.provider.jdbc.JdbcProvider;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -19,7 +18,7 @@ public class DataProviderAbstractFactoryTest {
     public void getType() throws IOException {
         String type = new DataProviderAbstractFactory() {
             @Override
-            public Object test(DataProviderSource source) throws Exception {
+            public Object test(DataSourceProviderEntity source) throws Exception {
                 return null;
             }
 

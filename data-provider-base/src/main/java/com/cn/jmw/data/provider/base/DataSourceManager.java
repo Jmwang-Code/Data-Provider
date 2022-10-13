@@ -1,6 +1,6 @@
 package com.cn.jmw.data.provider.base;
 
-import com.cn.jmw.data.provider.base.bean.DataProviderSource;
+import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
 import com.cn.jmw.data.provider.base.response.ResponseBody;
 
 /**
@@ -17,7 +17,7 @@ interface DataSourceManager {
      * 解决各种连接测试问题
      * @Date 18:13 2022/10/8
      */
-    ResponseBody testConnection(DataProviderSource t) throws Exception;
+    ResponseBody testConnection(DataSourceProviderEntity t) throws Exception;
 
     /**
      * @Author jmw

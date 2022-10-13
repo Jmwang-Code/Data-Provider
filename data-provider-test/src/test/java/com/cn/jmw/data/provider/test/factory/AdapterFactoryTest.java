@@ -1,6 +1,6 @@
 package com.cn.jmw.data.provider.test.factory;
 
-import com.cn.jmw.data.provider.base.bean.JdbcDriverInfo;
+import com.cn.jmw.data.provider.base.entity.JdbcDriverInfo;
 import com.cn.jmw.data.provider.jdbc.factory.AdapterFactory;
 import org.junit.Test;
 

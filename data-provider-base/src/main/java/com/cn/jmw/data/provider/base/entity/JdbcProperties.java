@@ -16,50 +16,38 @@
  * limitations under the License.
  */
 
-package com.cn.jmw.data.provider.base.bean;
+package com.cn.jmw.data.provider.base.entity;
 
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Properties;
 
 @Data
-public class JdbcDriverInfo {
+public class JdbcProperties {
 
     @NotBlank
     private String dbType;
-
-    private String version;
-
     @NotBlank
-    private String name;
+    private String url;
 
+    private String user;
+
+    private String password;
     @NotBlank
     private String driverClass;
 
-    @NotBlank
-    private String literalQuote;
+    private Properties properties;
 
-    @NotBlank
-    private String identifierQuote;
+    private boolean enableSpecialSql;
 
-    private String sqlDialect;
-
-    private String identifierEndQuote;
-
-    private String identifierEscapedQuote;
-
-    private String literalEndQuote;
-
-    private String adapterClass;
-
-    private String urlPrefix;
-
-    private Boolean quoteIdentifiers;
-
-    private Boolean supportSqlLimit;
-
-    public boolean supportSqlLimit() {
-        return supportSqlLimit != null && supportSqlLimit;
+    @Override
+    public String toString() {
+        return "JdbcConnectionProperties{" +
+                "dbType='" + dbType + '\'' +
+                ", url='" + url + '\'' +
+                ", user='" + user + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
-
 }

@@ -1,8 +1,7 @@
-package com.cn.jmw.data.provider.base.bean;
+package com.cn.jmw.data.provider.base.entity;
 
 import lombok.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,7 +14,7 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DataProviderSource {
+public class DataSourceProviderEntity {
 
     private String sourceId;
 

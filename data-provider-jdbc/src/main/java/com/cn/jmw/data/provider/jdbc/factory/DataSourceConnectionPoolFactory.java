@@ -1,6 +1,6 @@
 package com.cn.jmw.data.provider.jdbc.factory;
 
-import com.cn.jmw.data.provider.base.bean.JdbcProperties;
+import com.cn.jmw.data.provider.base.entity.JdbcProperties;
 
 import javax.sql.DataSource;
 
@@ -10,7 +10,7 @@ import javax.sql.DataSource;
  * @date 2022年10月08日 18:24
  * @Version 1.0
  */
-public interface DataProviderAdapterFactory<T extends DataSource> {
+public interface DataSourceConnectionPoolFactory<T extends DataSource> {
 
     T createDataSource(JdbcProperties jdbcProperties) throws Exception;
 

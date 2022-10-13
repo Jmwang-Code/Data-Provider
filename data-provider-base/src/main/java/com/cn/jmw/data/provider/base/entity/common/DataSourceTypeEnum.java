@@ -1,4 +1,4 @@
-package com.cn.jmw.data.provider.base.bean.common;
+package com.cn.jmw.data.provider.base.entity.common;
 
 /**
  * @author jmw

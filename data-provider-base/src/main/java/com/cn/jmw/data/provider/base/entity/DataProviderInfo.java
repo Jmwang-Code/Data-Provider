@@ -1,4 +1,4 @@
-package com.cn.jmw.data.provider.base.bean;
+package com.cn.jmw.data.provider.base.entity;
 
 import lombok.Data;
 

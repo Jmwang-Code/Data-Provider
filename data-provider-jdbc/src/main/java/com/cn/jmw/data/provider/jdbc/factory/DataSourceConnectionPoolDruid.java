@@ -2,7 +2,7 @@ package com.cn.jmw.data.provider.jdbc.factory;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import com.cn.jmw.data.provider.base.bean.JdbcProperties;
+import com.cn.jmw.data.provider.base.entity.JdbcProperties;
 import com.cn.jmw.data.provider.jdbc.JdbcProvider;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +16,7 @@ import java.util.Properties;
  * @Version 1.0
  */
 @Slf4j
-public class DataProviderAdapterFactoryDruid implements DataProviderAdapterFactory{
+public class DataSourceConnectionPoolDruid implements DataSourceConnectionPoolFactory {
 
     @Override
     public DruidDataSource createDataSource(JdbcProperties jdbcProperties) throws Exception {

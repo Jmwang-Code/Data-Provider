@@ -1,8 +1,8 @@
 package com.cn.jmw.data.provider.base.factory;
 
-import com.cn.jmw.data.provider.base.bean.DataProviderFactoryConfigTemplate;
-import com.cn.jmw.data.provider.base.bean.DataProviderInfo;
-import com.cn.jmw.data.provider.base.bean.DataProviderSource;
+import com.cn.jmw.data.provider.base.entity.DataProviderFactoryConfigTemplate;
+import com.cn.jmw.data.provider.base.entity.DataProviderInfo;
+import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -17,9 +17,9 @@ import java.io.InputStream;
 public abstract class DataProviderAbstractFactory {
 
     //对象映射器
-    private static ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    public abstract Object test(DataProviderSource source) throws Exception;
+    public abstract Object test(DataSourceProviderEntity source) throws Exception;
 
     /**
      * 配置文件加载功能 - 获取JSON配置文件名

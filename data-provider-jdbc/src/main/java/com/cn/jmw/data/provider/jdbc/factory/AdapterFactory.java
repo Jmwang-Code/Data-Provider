@@ -1,7 +1,7 @@
 package com.cn.jmw.data.provider.jdbc.factory;
 
-import com.cn.jmw.data.provider.base.bean.JdbcDriverInfo;
-import com.cn.jmw.data.provider.base.bean.JdbcProperties;
+import com.cn.jmw.data.provider.base.entity.JdbcDriverInfo;
+import com.cn.jmw.data.provider.base.entity.JdbcProperties;
 import com.cn.jmw.data.provider.base.utils.FileUtil;
 import com.cn.jmw.data.provider.jdbc.adapter.JdbcDataProviderAdapter;
 import com.fasterxml.jackson.databind.DeserializationFeature;

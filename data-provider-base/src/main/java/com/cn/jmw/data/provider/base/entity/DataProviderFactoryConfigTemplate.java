@@ -1,4 +1,4 @@
-package com.cn.jmw.data.provider.base.bean;
+package com.cn.jmw.data.provider.base.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

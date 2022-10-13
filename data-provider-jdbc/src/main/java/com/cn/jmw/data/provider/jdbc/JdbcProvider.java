@@ -1,13 +1,12 @@
 package com.cn.jmw.data.provider.jdbc;
 
-import com.cn.jmw.data.provider.base.bean.DataProviderSource;
-import com.cn.jmw.data.provider.base.bean.JdbcDriverInfo;
-import com.cn.jmw.data.provider.base.bean.JdbcProperties;
+import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
+import com.cn.jmw.data.provider.base.entity.JdbcProperties;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import com.cn.jmw.data.provider.jdbc.adapter.JdbcDataProviderAdapter;
 import com.cn.jmw.data.provider.jdbc.factory.AdapterFactory;
-import com.cn.jmw.data.provider.jdbc.factory.DataProviderAdapterFactory;
-import com.cn.jmw.data.provider.jdbc.factory.DataProviderAdapterFactoryDruid;
+import com.cn.jmw.data.provider.jdbc.factory.DataSourceConnectionPoolFactory;
+import com.cn.jmw.data.provider.jdbc.factory.DataSourceConnectionPoolDruid;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.sql.DataSource;
@@ -49,7 +48,7 @@ public class JdbcProvider extends DataProviderAbstractFactory {
      * @Description 匹配或者插入缓冲池中适配器
      * @Date 16:25 2022/10/9
      */
-    public JdbcDataProviderAdapter matchOrInsertAdapter(DataProviderSource source){
+    public JdbcDataProviderAdapter matchOrInsertAdapter(DataSourceProviderEntity source){
         //如果有就匹配返回对象
         JdbcDataProviderAdapter adapter = cacheAdapters.get(source.getSourceId());
         if (adapter!=null)return adapter;
@@ -62,10 +61,10 @@ public class JdbcProvider extends DataProviderAbstractFactory {
 
     /**
      * @Author jmw
-     * @Description DataProviderSource 对象转换为 JdbcProperties对象
+     * @Description DataSourceProviderEntity 对象转换为 JdbcProperties对象
      * @Date 16:39 2022/10/9
      */
-    public JdbcProperties conv2JdbcProperties(DataProviderSource source){
+    public JdbcProperties conv2JdbcProperties(DataSourceProviderEntity source){
         JdbcProperties jdbcProperties = new JdbcProperties();
         //做验证器
         jdbcProperties.setDbType(source.getProperties().get(DB_TYPE).toString().toUpperCase());
@@ -105,12 +104,12 @@ public class JdbcProvider extends DataProviderAbstractFactory {
      * @Description 获取连接池
      * @Date 12:17 2022/10/13
      */
-    public static DataProviderAdapterFactory<? extends DataSource> getDataSourceFactory() {
-        return new DataProviderAdapterFactoryDruid();
+    public static DataSourceConnectionPoolFactory<? extends DataSource> getDataSourceConnectionPool() {
+        return new DataSourceConnectionPoolDruid();
     }
 
     @Override
-    public Object test(DataProviderSource source) throws Exception {
+    public Object test(DataSourceProviderEntity source) throws Exception {
         //对象提取转换
         JdbcProperties jdbcProperties = conv2JdbcProperties(source);
         return AdapterFactory.createDataAdapter(jdbcProperties,false).test(jdbcProperties);

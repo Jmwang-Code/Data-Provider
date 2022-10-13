@@ -1,8 +1,8 @@
 package com.cn.jmw.data.provider.test;
 
 import com.cn.jmw.data.provider.base.OuterDataSourceManager;
-import com.cn.jmw.data.provider.base.bean.DataProviderSource;
-import com.cn.jmw.data.provider.base.bean.common.DataSourceTypeEnum;
+import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
+import com.cn.jmw.data.provider.base.entity.common.DataSourceTypeEnum;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import com.cn.jmw.data.provider.base.response.ResponseBody;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class OuterDataSourceManagerTest {
         map.put("password","kKJ8XynXLzjfYDA7");
     }
 
-    static DataProviderSource source = new DataProviderSource().builder()
+    static DataSourceProviderEntity source = new DataSourceProviderEntity().builder()
             .type("JDBC")
             .name("DEMO")
             .sourceId("1")
@@ -36,20 +36,22 @@ public class OuterDataSourceManagerTest {
 
     @Test
     public void loadDataProviderFactories(){
-        outerDataSourceManager.loadDataProviderFactories();
+        outerDataSourceManager.loadDataProviders();
         DataProviderAbstractFactory jdbc = outerDataSourceManager.cachedDataProviderAbstractFactories.get(DataSourceTypeEnum.JDBC.name());
         System.out.println(jdbc.getConfigJsonFileName());
     }
 
     @Test
     public void getDataProviderFactory(){
-        DataProviderAbstractFactory jdbc = outerDataSourceManager.getDataProviderFactory(DataSourceTypeEnum.JDBC.name());
+        DataProviderAbstractFactory jdbc = outerDataSourceManager.getDataProvider(DataSourceTypeEnum.JDBC.name());
         System.out.println(jdbc.getConfigJsonFileName());
     }
 
     @Test
     public void testConnection() throws Exception {
         ResponseBody responseBody = outerDataSourceManager.testConnection(source);
-        System.out.println(responseBody);
+
+        ResponseBody responseBody2 = outerDataSourceManager.testConnection(source);
+        System.out.println(responseBody +""+ responseBody2);
     }
 }
