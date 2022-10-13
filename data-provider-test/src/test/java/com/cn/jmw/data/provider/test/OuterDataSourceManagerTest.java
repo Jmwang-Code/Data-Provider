@@ -7,6 +7,8 @@ import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import com.cn.jmw.data.provider.base.response.ResponseBody;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 /**
  * @author jmw
  * @Description TODO
@@ -16,8 +18,20 @@ import org.junit.Test;
 public class OuterDataSourceManagerTest {
     static OuterDataSourceManager outerDataSourceManager = new OuterDataSourceManager();
 
+    static HashMap map = new HashMap();
+    static {
+        map.put("dbType","MYSQL");
+        map.put("driverClass","com.mysql.cj.jdbc.Driver");
+        map.put("url","jdbc:mysql://152.136.154.249:3306/demo?&allowMultiQueries=true&characterEncoding=utf-8");
+        map.put("user","demo");
+        map.put("password","kKJ8XynXLzjfYDA7");
+    }
+
     static DataProviderSource source = new DataProviderSource().builder()
             .type("JDBC")
+            .name("DEMO")
+            .sourceId("1")
+            .properties(map)
             .build();
 
     @Test

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
  * @date 2022年10月09日 17:15
  * @Version 1.0
  */
-public class FileUtils {
+public class FileUtil {
 
     public static String concatPath(String... paths) {
         StringBuilder stringBuilder = new StringBuilder();

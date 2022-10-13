@@ -1,9 +1,8 @@
 package com.cn.jmw.data.provider.jdbc.factory;
 
-import com.cn.jmw.data.provider.base.bean.DataProviderSource;
 import com.cn.jmw.data.provider.base.bean.JdbcDriverInfo;
 import com.cn.jmw.data.provider.base.bean.JdbcProperties;
-import com.cn.jmw.data.provider.base.utils.FileUtils;
+import com.cn.jmw.data.provider.base.utils.FileUtil;
 import com.cn.jmw.data.provider.jdbc.adapter.JdbcDataProviderAdapter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,7 +39,7 @@ public class AdapterFactory {
     private static final String JDBC_DRIVER_EXT = "config/jdbc-driver-ext.yml";
 
     //
-    public static final String DEFAULT_ADAPTER = "com.cn.jmw.data.provider.jdbc.JdbcDataProviderAdapter";
+    public static final String DEFAULT_ADAPTER = "com.cn.jmw.data.provider.jdbc.adapter.JdbcDataProviderAdapter";
 
 
     /**
@@ -49,9 +48,51 @@ public class AdapterFactory {
      * @Date 16:27 2022/10/9
      */
     public static JdbcDataProviderAdapter createDataAdapter(JdbcProperties source, boolean init) {
+        //多种JDBC加载驱动信息
         List<JdbcDriverInfo> jdbcDriverInfos = loadDriverInfoFromResource();
+        //过滤掉此次不需要的适配器
+        List<JdbcDriverInfo> driverInfos = jdbcDriverInfos.stream().filter(item -> source.getDbType().equals(item.getDbType()))
+                .collect(Collectors.toList());
+        if (driverInfos.size() == 0) {
+            log.error("message.provider.jdbc.dbtype", source.getDbType());
+        }
+        if (driverInfos.size() > 1) {
+            log.error("Duplicated dbType " + source.getDbType());
+        }
 
-        return null;
+        JdbcDriverInfo driverInfo = driverInfos.get(0);
+
+        if (StringUtils.isNotBlank(source.getDriverClass())) {
+            driverInfo.setDriverClass(source.getDriverClass());
+        }
+
+        /**
+         * 获取适配器
+         */
+        JdbcDataProviderAdapter adapter = null;
+        try {
+            if (StringUtils.isNotBlank(driverInfo.getAdapterClass())) {
+                try {
+                    //通过配置全路径名的方式获取，反射创建
+                    Class<?> aClass = Class.forName(driverInfo.getAdapterClass());
+                    adapter = (JdbcDataProviderAdapter) aClass.getDeclaredConstructor().newInstance();
+                } catch (Exception e) {
+                    log.error("Jdbc adapter class (" + driverInfo.getAdapterClass() + ") load error.use default adapter");
+                }
+            }
+            if (adapter == null) {
+                adapter = (JdbcDataProviderAdapter) Class.forName(DEFAULT_ADAPTER).getDeclaredConstructor().newInstance();
+            }
+        } catch (Exception e) {
+            log.error("Jdbc adapter class load error ", e);
+        }
+        if (adapter == null) {
+            log.info( "message.provider.jdbc.create.error", source.getDbType());
+        }
+        if (init) {
+            adapter.init(source, driverInfo);
+        }
+        return adapter;
     }
 
     /**
@@ -68,7 +109,7 @@ public class AdapterFactory {
         //构建数据库类型
         Map<String, Map<String, String>> buildIn = loadYml(JDBC_DRIVER_BUILD_IN);
         //Owner用户数据库类型
-        Map<String, Map<String, String>> extDrivers = loadYml(new File(FileUtils.concatPath(System.getProperty("user.dir"), JDBC_DRIVER_EXT)));
+        Map<String, Map<String, String>> extDrivers = loadYml(new File(FileUtil.concatPath(System.getProperty("user.dir"), JDBC_DRIVER_EXT)));
         //将扩展类的融合到 数据库类型中
         if (!CollectionUtils.isEmpty(extDrivers)) extDrivers.forEach((k, v) -> {
             if (buildIn.get(k) == null) {
@@ -127,6 +168,20 @@ public class AdapterFactory {
             log.error(String.valueOf(e));
         }
         return null;
+    }
+
+    /**
+     * @Author jmw
+     * @Description 从jdbc驱动程序信息 缓冲池中获取配置文件
+     * @Date 11:28 2022/10/13
+     */
+    public static JdbcDriverInfo getJdbcDriverInfo(String dbType) {
+        if (jdbcDriverInfoMap.isEmpty()) {
+            for (JdbcDriverInfo jdbcDriverInfo : loadDriverInfoFromResource()) {
+                jdbcDriverInfoMap.put(jdbcDriverInfo.getDbType(), jdbcDriverInfo);
+            }
+        }
+        return jdbcDriverInfoMap.get(dbType);
     }
 
 }
