@@ -17,7 +17,7 @@ import java.io.InputStream;
 public abstract class DataProviderAbstractFactory {
 
     //对象映射器
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECTMAPPER = new ObjectMapper();
 
     public abstract Object test(DataSourceProviderEntity source) throws Exception;
 
@@ -31,7 +31,7 @@ public abstract class DataProviderAbstractFactory {
      */
     public DataProviderFactoryConfigTemplate getConfigTemplate() throws IOException {
         try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(getConfigJsonFileName())) {
-            return MAPPER.readValue(resourceAsStream, DataProviderFactoryConfigTemplate.class);
+            return OBJECTMAPPER.readValue(resourceAsStream, DataProviderFactoryConfigTemplate.class);
         }
     }
 
@@ -40,10 +40,11 @@ public abstract class DataProviderAbstractFactory {
      */
     public DataProviderInfo getBaseInfo() throws IOException {
         DataProviderFactoryConfigTemplate template = getConfigTemplate();
-        DataProviderInfo dataProviderInfo = new DataProviderInfo();
-        dataProviderInfo.setName(template.getName());
-        dataProviderInfo.setType(template.getType());
-        return dataProviderInfo;
+        return DataProviderInfo
+                .builder()
+                .type(template.getType())
+                .name(template.getName())
+                .build();
     }
 
     /**

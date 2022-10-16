@@ -2,7 +2,7 @@ package com.cn.jmw.data.provider.jdbc.adapter;
 
 import com.cn.jmw.data.provider.base.entity.JdbcDriverInfo;
 import com.cn.jmw.data.provider.base.entity.JdbcProperties;
-import com.cn.jmw.data.provider.base.utils.BeanValidatorUtil;
+import com.cn.jmw.data.provider.base.utils.EntityValidatorUtil;
 import com.cn.jmw.data.provider.jdbc.JdbcProvider;
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,7 +55,7 @@ public class JdbcDataProviderAdapter implements Closeable {
 
     public boolean test(JdbcProperties jdbcProperties){
         //数据验证 注释的约束进行验证（NotBlank）
-        BeanValidatorUtil.validate(jdbcProperties);
+        EntityValidatorUtil.validate(jdbcProperties);
         try{
             Class.forName(jdbcProperties.getDriverClass());
         } catch (ClassNotFoundException e) {

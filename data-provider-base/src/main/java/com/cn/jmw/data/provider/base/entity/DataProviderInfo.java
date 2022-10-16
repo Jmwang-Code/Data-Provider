@@ -1,5 +1,7 @@
 package com.cn.jmw.data.provider.base.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,6 +13,8 @@ import java.io.Serializable;
  * @Version 1.0
  */
 @Data
+@Builder
+@AllArgsConstructor
 public class DataProviderInfo implements Serializable {
 
     private String type;

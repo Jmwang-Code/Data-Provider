@@ -39,13 +39,10 @@ public class OuterDataSourceManager extends DataSourceExecuteOptimizer implement
      * @Date 18:38 2022/10/8
      */
     public DataProviderAbstractFactory getDataProvider(String type) {
-        if (cachedDataProviderAbstractFactories.size() == 0) {
-            loadDataProviders();
-        }
-        DataProviderAbstractFactory dataProvider = cachedDataProviderAbstractFactories.get(type);
-        if (dataProvider == null) {
-            log.info("No data provider type " + type);
-        }
+        DataProviderAbstractFactory dataProvider = cachedDataProviderAbstractFactories.size() == 0
+                ? loadDataProviders().cachedDataProviderAbstractFactories.get(type)
+                : cachedDataProviderAbstractFactories.get(type);
+        if (dataProvider == null) log.error("No data provider type " + type);
         return dataProvider;
     }
 
@@ -54,21 +51,15 @@ public class OuterDataSourceManager extends DataSourceExecuteOptimizer implement
      * @Description 加载工厂
      * @Date 18:38 2022/10/8
      */
-    public void loadDataProviders() {
-        //预览版本API 默认下禁用
-        //Thread.startVirtualThread(() -> {
-        //Code to execute in virtual thread
-        System.out.println("Virtual Thread");
-        ServiceLoader<DataProviderAbstractFactory> load = ServiceLoader.load(DataProviderAbstractFactory.class);
-        for (DataProviderAbstractFactory dataProvider : load) {
+    public OuterDataSourceManager loadDataProviders() {
+        for (DataProviderAbstractFactory dataProvider : ServiceLoader.load(DataProviderAbstractFactory.class)) {
             try {
-                //已经进行了数据加载
                 cachedDataProviderAbstractFactories.put(dataProvider.getType(), dataProvider);
             } catch (IOException e) {
                 log.error("", e);
             }
         }
-        //});
+        return this;
     }
 
 }

@@ -16,7 +16,7 @@ import java.util.StringJoiner;
  * @Version 1.0
  */
 @Slf4j
-public class BeanValidatorUtil {
+public class EntityValidatorUtil {
 
     private static final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 
@@ -24,9 +24,7 @@ public class BeanValidatorUtil {
         Set<ConstraintViolation<Object>> validate = validatorFactory.getValidator().validate(obj, groups);
         if (!CollectionUtils.isEmpty(validate)) {
             StringJoiner message = new StringJoiner(",");
-            for (ConstraintViolation<Object> v : validate) {
-                message.add(v.getPropertyPath() + ":" + v.getMessage());
-            }
+            validate.stream().forEach(v -> message.add(v.getPropertyPath() + ":" + v.getMessage()));
             log.info(message.toString());
         }
     }

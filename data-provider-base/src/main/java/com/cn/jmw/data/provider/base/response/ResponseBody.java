@@ -17,4 +17,6 @@ public class ResponseBody {
     public Object status;
 
     public String body;
+
+    public String errorMsg;
 }
