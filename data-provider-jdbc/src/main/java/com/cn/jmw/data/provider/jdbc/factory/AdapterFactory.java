@@ -36,7 +36,7 @@ public class AdapterFactory {
     private static final String JDBC_DRIVER_BUILD_IN = "/jdbc-driver.yml";
 
     //扩展类驱动
-    private static final String JDBC_DRIVER_EXT = "config/jdbc-driver-ext.yml";
+    private static final String JDBC_DRIVER_EXT = "/config/jdbc-driver-ext.yml";
 
     //
     public static final String DEFAULT_ADAPTER = "com.cn.jmw.data.provider.jdbc.adapter.JdbcDataProviderAdapter";
@@ -108,8 +108,10 @@ public class AdapterFactory {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         //构建数据库类型
         Map<String, Map<String, String>> buildIn = loadYml(JDBC_DRIVER_BUILD_IN);
-        //Owner用户数据库类型
-        Map<String, Map<String, String>> extDrivers = loadYml(new File(FileUtil.concatPath(System.getProperty("user.dir"), JDBC_DRIVER_EXT)));
+        //Owner用户数据库类型 TODO 暂时不支持外接扩展的类型，等以后开发专门对外保留扩展接口
+//        Map<String, Map<String, String>> extDrivers = loadYml(new File(FileUtil.concatPath(System.getProperty("user.dir"), JDBC_DRIVER_EXT)));
+        Map<String, Map<String, String>> extDrivers = loadYml(JDBC_DRIVER_EXT);
+
         //将扩展类的融合到 数据库类型中
         if (!CollectionUtils.isEmpty(extDrivers)) extDrivers.forEach((k, v) -> {
             if (buildIn.get(k) == null) {

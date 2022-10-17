@@ -27,6 +27,7 @@
         <module>data-provider-base</module>
         <module>data-provider-jdbc</module>
         <module>data-provider-test</module>
+        <module>data-provider-es</module>
     </modules>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
@@ -89,7 +90,22 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>8.0.30</version>
             </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>7.10.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>7.10.2</version>
+            </dependency>
 
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.83</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -98,9 +114,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
                 <configuration>
-<!--                    <testFailureIgnore>true</testFailureIgnore>-->
+                    <!-- 开启跳过测试 -->
                     <skipTests>true</skipTests>
+                    <!-- 包含指定的测试用例 -->
+<!--                    <includes>-->
+<!--                        <include>**/User*Test.java</include>-->
+<!--                    </includes>-->
+                    <!-- 排除指定的测试用例 -->
+<!--                    <excludes>-->
+<!--                        <exclude>**/User*TestCase.java</exclude>-->
+<!--                    </excludes>-->
                 </configuration>
             </plugin>
             <plugin>

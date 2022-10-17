@@ -5,10 +5,30 @@ import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
 import com.cn.jmw.data.provider.base.entity.common.DataSourceTypeEnum;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import com.cn.jmw.data.provider.base.response.ResponseBody;
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.CreateIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexResponse;
+import org.elasticsearch.client.indices.GetIndexRequest;
+import org.elasticsearch.client.indices.GetIndexResponse;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+@SpringBootTest
 /**
  * @author jmw
  * @Description TODO
@@ -53,5 +73,52 @@ public class OuterDataSourceManagerTest {
 
         ResponseBody responseBody2 = outerDataSourceManager.testConnection(source);
         System.out.println(responseBody +""+ responseBody2);
+    }
+
+    //测试索引创建
+    @Test
+    public void contextLoads() throws IOException {
+        List<HttpHost> hostLists = new ArrayList<>();
+        String[] hostList = "192.168.103.47:9200".split(",");
+        for (String addr : hostList) {
+            String host = addr.split(":")[0];
+            String port = addr.split(":")[1];
+            hostLists.add(new HttpHost(host, Integer.parseInt(port), "http"));
+        }
+
+        final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("elastic", "eoi@%TGB"));
+
+        // 转换成 HttpHost 数组
+        HttpHost[] httpHost = hostLists.toArray(new HttpHost[]{});
+        // 构建连接对象
+        RestClientBuilder builder = RestClient.builder(httpHost);
+        // 异步连接延时配置
+        builder.setRequestConfigCallback(requestConfigBuilder -> {
+            requestConfigBuilder.setConnectTimeout(5000);
+            requestConfigBuilder.setSocketTimeout(5000);
+            requestConfigBuilder.setConnectionRequestTimeout(5000);
+            return requestConfigBuilder;
+        });
+        // 异步连接数配置
+        builder.setHttpClientConfigCallback(httpClientBuilder -> {
+            httpClientBuilder.setMaxConnTotal(100);
+            httpClientBuilder.setMaxConnPerRoute(100);
+            return httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+        });
+        RestHighLevelClient restHighLevelClient = new RestHighLevelClient(builder);
+//        //1.创建索引请求
+//        CreateIndexRequest request = new CreateIndexRequest("asdadd_index");
+//
+//        //2.执行创建请求 IndecesClient 请求后获得响应
+//        CreateIndexResponse createIndexResponse = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);
+//
+//        System.out.println(createIndexResponse);
+        GetIndexRequest getIndexRequest = new GetIndexRequest("wjm_index");
+
+        //2.client 索引操作 获取索引
+        GetIndexResponse getIndexResponse = restHighLevelClient.indices().get(getIndexRequest, RequestOptions.DEFAULT);
+
+        System.out.println(getIndexResponse);
     }
 }
