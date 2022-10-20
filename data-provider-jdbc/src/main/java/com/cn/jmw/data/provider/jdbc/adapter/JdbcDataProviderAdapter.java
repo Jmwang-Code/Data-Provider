@@ -2,6 +2,12 @@ package com.cn.jmw.data.provider.jdbc.adapter;
 
 import com.cn.jmw.data.provider.base.entity.JdbcDriverInfo;
 import com.cn.jmw.data.provider.base.entity.JdbcProperties;
+import com.cn.jmw.data.provider.base.entity.PageInfo;
+import com.cn.jmw.data.provider.base.entity.common.ValueType;
+import com.cn.jmw.data.provider.base.entity.db.Column;
+import com.cn.jmw.data.provider.base.entity.db.Dataframe;
+import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
+import com.cn.jmw.data.provider.base.utils.DataTypeUtils;
 import com.cn.jmw.data.provider.base.utils.EntityValidatorUtil;
 import com.cn.jmw.data.provider.jdbc.JdbcProvider;
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 import javax.sql.DataSource;
 import java.io.Closeable;
 import java.io.IOException;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -70,4 +78,109 @@ public class JdbcDataProviderAdapter implements Closeable {
         }
         return true;
     }
+
+    public Dataframe executionOnSource(ExecutionParam executionParam) throws SQLException {
+        Dataframe dataframe;
+        String sql = executionParam.getSql();
+
+        dataframe = execute(sql);
+        return dataframe;
+    }
+
+    /**
+     * 用于未支持SQL分页的数据库，使用通用的分页方案进行分页。
+     *
+     * @param selectSql 提交至数据源执行的SQL
+     * @param pageInfo  需要执行的分页信息
+     * @return 分页后的数据
+     * @throws SQLException SQL执行异常
+     */
+    protected Dataframe execute(String selectSql, PageInfo pageInfo) throws SQLException {
+        Dataframe dataframe;
+        try (Connection conn = getConn()) {
+            try (Statement statement = conn.createStatement()) {
+                statement.setFetchSize((int) Math.min(pageInfo.getPageSize(), 10_000));
+                try (ResultSet resultSet = statement.executeQuery(selectSql)) {
+                    try {
+                        resultSet.absolute((int) Math.min(pageInfo.getTotal(), (pageInfo.getPageNo() - 1) * pageInfo.getPageSize()));
+                    } catch (Exception e) {
+                        int count = 0;
+                        while (count < (pageInfo.getPageNo() - 1) * pageInfo.getPageSize() && resultSet.next()) {
+                            count++;
+                        }
+                    }
+                    dataframe = parseResultSet(resultSet, pageInfo.getPageSize());
+                    return dataframe;
+                }
+            }
+        }
+    }
+
+    /**
+     * 直接执行，返回所有数据，用于支持已经支持分页的数据库，或者不需要分页的查询。
+     *
+     * @param sql 直接提交至数据源执行的SQL，通常已经包含了分页
+     * @return 全量数据
+     * @throws SQLException SQL执行异常
+     */
+    protected Dataframe execute(String sql) throws SQLException {
+        try (Connection conn = getConn()) {
+            try (Statement statement = conn.createStatement()) {
+                try (ResultSet rs = statement.executeQuery(sql)) {
+                    return parseResultSet(rs);
+                }
+            }
+        }
+    }
+
+    protected Connection getConn() throws SQLException {
+        return dataSource.getConnection();
+    }
+
+    protected Dataframe parseResultSet(ResultSet rs) throws SQLException {
+        return parseResultSet(rs, Long.MAX_VALUE);
+    }
+
+    protected Dataframe parseResultSet(ResultSet rs, long count) throws SQLException {
+        Dataframe dataframe = new Dataframe();
+        List<Column> columns = getColumns(rs);
+        ArrayList<List<Object>> rows = new ArrayList<>();
+        int c = 0;
+        while (rs.next()) {
+            ArrayList<Object> row = new ArrayList<>();
+            rows.add(row);
+            for (int i = 1; i < columns.size() + 1; i++) {
+                row.add(getObjFromResultSet(rs, i));
+            }
+            c++;
+            if (c >= count) {
+                break;
+            }
+        }
+        dataframe.setColumns(columns);
+        dataframe.setRows(rows);
+        return dataframe;
+    }
+
+    protected List<Column> getColumns(ResultSet rs) throws SQLException {
+        ArrayList<Column> columns = new ArrayList<>();
+        for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+            String columnTypeName = rs.getMetaData().getColumnTypeName(i);
+            String columnName = rs.getMetaData().getColumnLabel(i);
+            ValueType valueType = DataTypeUtils.sqlType2DataType(columnTypeName);
+            columns.add(Column.of(valueType, columnName));
+        }
+        return columns;
+    }
+
+    protected Object getObjFromResultSet(ResultSet rs, int columnIndex) throws SQLException {
+        Object obj = rs.getObject(columnIndex);
+        if (obj instanceof Boolean) {
+            obj = rs.getObject(columnIndex).toString();
+        } else if (obj instanceof LocalDateTime) {
+            obj = rs.getTimestamp(columnIndex);
+        }
+        return obj;
+    }
+
 }

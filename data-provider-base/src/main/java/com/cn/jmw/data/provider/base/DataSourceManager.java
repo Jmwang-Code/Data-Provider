@@ -1,7 +1,10 @@
 package com.cn.jmw.data.provider.base;
 
 import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
+import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.response.ResponseBody;
+
+import java.sql.SQLException;
 
 /**
  * @author jmw
@@ -31,7 +34,7 @@ interface DataSourceManager {
      * @Description 各种准备执行逻辑
      * @Date 18:20 2022/10/8
      */
-//    <T,A> T execute(A a);
+    public ResponseBody execute(DataSourceProviderEntity source, ExecutionParam executionParam) throws SQLException;
 
 
 }

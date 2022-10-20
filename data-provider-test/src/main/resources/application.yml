@@ -1,0 +1,19 @@
+server:
+  port: 8088
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://${datasource.ip:null}:${datasource.port:3306}/${datasource.database:demo}?&allowMultiQueries=true&characterEncoding=utf-8&useSSL=false
+    username: ${datasource.username:root}
+    password: ${datasource.password:123456}
+elasticsearch:
+  schema: http
+  address: 192.168.123.165 #你的服务器地址
+  connectTimeout: 5000
+  socketTimeout: 5000
+  connectionRequestTimeout: 5000
+  maxConnectNum: 100
+  maxConnectPerRoute: 100
+  UserName: elastic #账号
+  Password: h123456 #你的elasticsearch密码

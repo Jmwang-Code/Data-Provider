@@ -2,6 +2,8 @@ package com.cn.jmw.data.provider.jdbc;
 
 import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
 import com.cn.jmw.data.provider.base.entity.JdbcProperties;
+import com.cn.jmw.data.provider.base.entity.db.Dataframe;
+import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import com.cn.jmw.data.provider.jdbc.adapter.JdbcDataProviderAdapter;
 import com.cn.jmw.data.provider.jdbc.factory.AdapterFactory;
@@ -10,6 +12,7 @@ import com.cn.jmw.data.provider.jdbc.factory.DataSourceConnectionPoolDruid;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -113,6 +116,15 @@ public class JdbcProvider extends DataProviderAbstractFactory {
         //对象提取转换
         JdbcProperties jdbcProperties = conv2JdbcProperties(source);
         return AdapterFactory.createDataAdapter(jdbcProperties,false).test(jdbcProperties);
+    }
+
+    @Override
+    public Dataframe execute(DataSourceProviderEntity source, ExecutionParam executionParam) throws SQLException {
+        JdbcDataProviderAdapter adapter = matchOrInsertAdapter(source);
+
+        //Assume that data aggregation or normal execution may occur
+        Dataframe dataframe = adapter.executionOnSource(executionParam);
+        return dataframe;
     }
 
     @Override

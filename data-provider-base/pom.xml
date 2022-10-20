@@ -47,6 +47,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.calcite</groupId>
+            <artifactId>calcite-core</artifactId>
+        </dependency>
     </dependencies>
     <distributionManagement>
         <snapshotRepository>

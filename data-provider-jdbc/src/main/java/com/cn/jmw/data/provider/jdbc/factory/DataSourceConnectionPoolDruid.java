@@ -33,12 +33,13 @@ public class DataSourceConnectionPoolDruid implements DataSourceConnectionPoolFa
 
     }
 
+    @Override
     /**
      * @Author jmw
      * @Description 获取德鲁伊连接池中的配置数据
      * @Date 12:22 2022/10/13
      */
-    private Properties configDataSource(JdbcProperties properties) {
+    public Properties configDataSource(JdbcProperties properties) {
         Properties pro = new Properties();
         //connect params
         pro.setProperty(DruidDataSourceFactory.PROP_DRIVERCLASSNAME, properties.getDriverClass());

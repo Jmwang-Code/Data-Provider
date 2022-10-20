@@ -1,0 +1,39 @@
+#EXAPLE:
+#  db-type: "example"
+#  name: "example"
+#  literal-quote: "'"
+#  identifier-quote: "`"
+#  driver-class: "com.example.jdbc.Driver" # optional
+#  url-prefix: "jdbc:example://" # optional
+#  sql-dialect: "com.cn.jmw.data.provider.base.calcite.dialect.ExampleSqlDialectSupport"  # optional
+#  identifier-end-quote: "`"  # optional
+#  literal-end-quote: "'"  # optional
+#  identifier-escaped-quote: "`"  # optional
+#  adapter-class: 'com.cn.jmw.data.provider.jdbc.adapter.ExampleDataProviderAdapter'  # optional
+#  quote-identifiers: true  # optional
+#  support-sql-limit: true  # optional
+#
+
+IMPALA:
+  db-type: "impala"
+  name: "impala"
+  driver-class: "com.cloudera.impala.jdbc41.Driver"
+  literal-quote: "'"
+  identifier-quote: "`"
+  adapter-class: "com.cn.jmw.data.provider.jdbc.adapter.ImpalaDataProviderAdapter"
+  url-prefix: "jdbc:impala://"
+  sql-dialect: "com.cn.jmw.data.provider.base.calcite.dialect.ImpalaSqlDialectSupport"
+
+
+ORACLE:
+  quote-identifiers: false
+
+DORIS:
+  db-type: "doris"
+  name: "doris"
+  driver-class: "com.mysql.cj.jdbc.Driver"
+  literal-quote: "'"
+  identifier-quote: "`"
+  adapter-class: "com.cn.jmw.data.provider.jdbc.adapter.DorisDataProviderAdapter"
+  url-prefix: "jdbc:mysql://"
+

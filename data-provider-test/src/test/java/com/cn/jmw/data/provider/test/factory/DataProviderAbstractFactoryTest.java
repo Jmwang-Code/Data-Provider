@@ -1,6 +1,8 @@
 package com.cn.jmw.data.provider.test.factory;
 
 import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
+import com.cn.jmw.data.provider.base.entity.db.Dataframe;
+import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import org.junit.Test;
 
@@ -19,6 +21,11 @@ public class DataProviderAbstractFactoryTest {
         String type = new DataProviderAbstractFactory() {
             @Override
             public Object test(DataSourceProviderEntity source) throws Exception {
+                return null;
+            }
+
+            @Override
+            public Dataframe execute(DataSourceProviderEntity source, ExecutionParam executionParam) {
                 return null;
             }
 

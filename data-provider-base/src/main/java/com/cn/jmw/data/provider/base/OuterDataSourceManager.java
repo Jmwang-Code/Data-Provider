@@ -1,11 +1,13 @@
 package com.cn.jmw.data.provider.base;
 
 import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
+import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import com.cn.jmw.data.provider.base.response.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -29,9 +31,18 @@ public class OuterDataSourceManager extends DataSourceExecuteOptimizer implement
         //获取服务
         return ResponseBody
                 .builder()
-                .status(getDataProvider(source.getType()).test(source))
+                .status(ResponseBody.jsonConverter(getDataProvider(source.getType()).test(source)))
                 .build();
     }
+
+    @Override
+    public ResponseBody execute(DataSourceProviderEntity source, ExecutionParam executionParam) throws SQLException {
+        return ResponseBody
+                .builder()
+                .status(ResponseBody.jsonConverter(getDataProvider(source.getType()).execute(source,executionParam)))
+                .build();
+    }
+
 
     /**
      * @Author jmw

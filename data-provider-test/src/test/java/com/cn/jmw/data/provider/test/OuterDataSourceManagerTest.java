@@ -3,8 +3,10 @@ package com.cn.jmw.data.provider.test;
 import com.cn.jmw.data.provider.base.OuterDataSourceManager;
 import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
 import com.cn.jmw.data.provider.base.entity.common.DataSourceTypeEnum;
+import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import com.cn.jmw.data.provider.base.response.ResponseBody;
+import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -23,7 +25,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +50,7 @@ public class OuterDataSourceManagerTest {
     static {
         map.put("dbType","MYSQL");
         map.put("driverClass","com.mysql.cj.jdbc.Driver");
-        map.put("url","jdbc:mysql://152.136.154.249:3306/demo?&allowMultiQueries=true&characterEncoding=utf-8");
+        map.put("url","jdbc:mysql://152.136.154.249:3306/demo?&allowMultiQueries=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC");
         map.put("user","demo");
         map.put("password","kKJ8XynXLzjfYDA7");
     }
@@ -73,6 +81,13 @@ public class OuterDataSourceManagerTest {
 
         ResponseBody responseBody2 = outerDataSourceManager.testConnection(source);
         System.out.println(responseBody +""+ responseBody2);
+    }
+
+    @Test
+    public void execute() throws SQLException, IOException {
+        ResponseBody execute = outerDataSourceManager.execute(source, ExecutionParam.builder().sql("SELECT * FROM role").build());
+        System.out.println(execute.getStatus());
+        Files.write(Paths.get("C:\\Users\\jmw\\Desktop\\1.txt"),execute.getStatus().toString().getBytes("UTF-8"));
     }
 
     //测试索引创建

@@ -15,39 +15,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.cn.jmw.data.provider.base.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import java.util.Properties;
+import java.io.Serializable;
 
+/**
+ * @Author jmw
+ * @Description 页面信息
+ * @Date 23:44 2022/10/17
+ */
 @Data
-public class JdbcProperties {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class PageInfo implements Serializable {
 
-    @NotBlank
-    private String dbType;
-    @NotBlank
-    private String url;
+    /**
+     * 页数
+     */
+    private long pageSize;
 
-    private String user;
+    /**
+     * 页码
+     */
+    private long pageNo;
 
-    private String password;
-    @NotBlank
-    private String driverClass;
+    /**
+     * 每页条数
+     */
+    private long total;
 
-    private Properties properties = new Properties();
-
-    private boolean enableSpecialSql;
+    /**
+     * 总条数
+     */
+    private boolean countTotal;
 
     @Override
     public String toString() {
-        return "JdbcConnectionProperties{" +
-                "dbType='" + dbType + '\'' +
-                ", url='" + url + '\'' +
-                ", user='" + user + '\'' +
-                ", password='" + password + '\'' +
+        return "PageInfo{" +
+                "pageSize=" + pageSize +
+                ", pageNo=" + pageNo +
+                ", total=" + total +
                 '}';
     }
 }

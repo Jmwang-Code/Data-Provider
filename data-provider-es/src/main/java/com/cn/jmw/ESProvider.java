@@ -21,7 +21,7 @@ public class ESProvider extends DataProviderAbstractDefaultFactory {
     }
 
     @Override
-    public Dataframes loadDataFromSource(DataSourceProviderEntity config) throws Exception {
+    public Dataframes fullLoadOfDataSource(DataSourceProviderEntity config) throws Exception {
         return null;
     }
 }

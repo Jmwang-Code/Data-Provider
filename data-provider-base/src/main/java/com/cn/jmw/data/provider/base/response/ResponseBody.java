@@ -1,5 +1,7 @@
 package com.cn.jmw.data.provider.base.response;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.*;
 
 /**
@@ -14,9 +16,14 @@ import lombok.*;
 @AllArgsConstructor
 public class ResponseBody {
 
-    public Object status;
+    private Object status;
 
-    public String body;
+    private String body;
 
-    public String errorMsg;
+    private String errorMsg;
+
+    public static String jsonConverter(Object o){
+        JSONObject jsonObject = (JSONObject) JSONObject.toJSON(o);
+        return jsonObject.toString();
+    }
 }

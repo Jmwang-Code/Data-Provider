@@ -106,6 +106,13 @@
                 <artifactId>fastjson</artifactId>
                 <version>1.2.83</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.calcite</groupId>
+                <artifactId>calcite-core</artifactId>
+                <version>1.26.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
