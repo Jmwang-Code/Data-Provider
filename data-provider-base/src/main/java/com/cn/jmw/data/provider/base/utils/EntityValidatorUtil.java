@@ -11,7 +11,7 @@ import java.util.StringJoiner;
 
 /**
  * @author jmw
- * @Description Bean验证器工具
+ * @Description Entity attribute validator
  * @date 2022年10月13日 10:41
  * @Version 1.0
  */

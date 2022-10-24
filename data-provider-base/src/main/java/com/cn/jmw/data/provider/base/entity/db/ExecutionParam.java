@@ -1,5 +1,6 @@
 package com.cn.jmw.data.provider.base.entity.db;
 
+import com.cn.jmw.data.provider.base.entity.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ExecutionParam {
+
+    private PageInfo pageInfo;
 
     @Builder.Default
     private String sql = "SELECT 1 FROM DUAL";

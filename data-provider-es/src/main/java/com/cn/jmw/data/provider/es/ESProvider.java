@@ -1,4 +1,4 @@
-package com.cn.jmw;
+package com.cn.jmw.data.provider.es;
 
 import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
 import com.cn.jmw.data.provider.base.entity.db.Dataframes;

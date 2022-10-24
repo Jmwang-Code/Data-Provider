@@ -47,9 +47,12 @@ public class JdbcProvider extends DataProviderAbstractFactory {
     public static final Integer DEFAULT_MAX_WAIT = 5000;
 
     /**
+     * @Description Match or insert adapter
+     * 
+     * 
+     * 
      * @Author jmw
-     * @Description 匹配或者插入缓冲池中适配器
-     * @Date 16:25 2022/10/9
+     * @Date 16:05 2022/10/21
      */
     public JdbcDataProviderAdapter matchOrInsertAdapter(DataSourceProviderEntity source){
         //如果有就匹配返回对象
@@ -63,9 +66,12 @@ public class JdbcProvider extends DataProviderAbstractFactory {
     }
 
     /**
+     * @Description DataSourceProviderEntity object converted to JdbcProperties object
+     *
+     *
+     *
      * @Author jmw
-     * @Description DataSourceProviderEntity 对象转换为 JdbcProperties对象
-     * @Date 16:39 2022/10/9
+     * @Date 16:06 2022/10/21
      */
     public JdbcProperties conv2JdbcProperties(DataSourceProviderEntity source){
         JdbcProperties jdbcProperties = new JdbcProperties();
@@ -103,9 +109,12 @@ public class JdbcProvider extends DataProviderAbstractFactory {
     }
 
     /**
+     * @Description Get data source connection pool
+     * 
+     * 
+     * 
      * @Author jmw
-     * @Description 获取连接池
-     * @Date 12:17 2022/10/13
+     * @Date 16:10 2022/10/21
      */
     public static DataSourceConnectionPoolFactory<? extends DataSource> getDataSourceConnectionPool() {
         return new DataSourceConnectionPoolDruid();

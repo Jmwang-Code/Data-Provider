@@ -28,6 +28,14 @@ import java.util.Date;
 
 public class DataTypeUtils {
 
+    /**
+     * @Description Sql type parser
+     *
+     *
+     *
+     * @Author jmw
+     * @Date 16:17 2022/10/21
+     */
     public static ValueType sqlType2DataType(String sqlType) {
         sqlType = sqlType.toUpperCase();
         SqlTypeName sqlTypeName = SqlTypeName.get(sqlType);

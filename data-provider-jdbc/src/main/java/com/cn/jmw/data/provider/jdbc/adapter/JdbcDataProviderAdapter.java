@@ -79,6 +79,14 @@ public class JdbcDataProviderAdapter implements Closeable {
         return true;
     }
 
+    /**
+     * @Description Execute normally on the source
+     * 
+     * 
+     * 
+     * @Author jmw
+     * @Date 16:13 2022/10/21
+     */
     public Dataframe executionOnSource(ExecutionParam executionParam) throws SQLException {
         Dataframe dataframe;
         String sql = executionParam.getSql();
@@ -137,6 +145,14 @@ public class JdbcDataProviderAdapter implements Closeable {
         return dataSource.getConnection();
     }
 
+    /**
+     * @Description Parse result set
+     * 
+     * 
+     * 
+     * @Author jmw
+     * @Date 16:14 2022/10/21
+     */
     protected Dataframe parseResultSet(ResultSet rs) throws SQLException {
         return parseResultSet(rs, Long.MAX_VALUE);
     }
@@ -167,6 +183,7 @@ public class JdbcDataProviderAdapter implements Closeable {
         for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
             String columnTypeName = rs.getMetaData().getColumnTypeName(i);
             String columnName = rs.getMetaData().getColumnLabel(i);
+            //匹配对应Sql类型
             ValueType valueType = DataTypeUtils.sqlType2DataType(columnTypeName);
             columns.add(Column.of(valueType, columnName));
         }
