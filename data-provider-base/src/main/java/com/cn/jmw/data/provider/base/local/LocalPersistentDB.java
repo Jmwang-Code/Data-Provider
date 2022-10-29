@@ -1,4 +1,4 @@
-package com.cn.jmw.data.provider.localdb;
+package com.cn.jmw.data.provider.base.local;
 
 import com.cn.jmw.data.provider.base.entity.PageInfo;
 import com.cn.jmw.data.provider.base.entity.db.Column;
@@ -6,7 +6,6 @@ import com.cn.jmw.data.provider.base.entity.db.Dataframe;
 import com.cn.jmw.data.provider.base.entity.db.Dataframes;
 import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.utils.DataTypeUtils;
-import jdk.javadoc.doclet.Doclet;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -50,7 +49,7 @@ public class LocalPersistentDB {
 
 
     public static Dataframe executeLocalQuery(ExecutionParam executeParam, Dataframes dataframes) throws Exception {
-        return executeLocalQuery(executeParam, dataframes, false);
+        return executeLocalQuery(executeParam, dataframes, false,null);
     }
 
     public static void init() {
@@ -65,11 +64,11 @@ public class LocalPersistentDB {
         }
     }
 
-    public static Dataframe executeLocalQuery(ExecutionParam executeParam, Dataframes dataframes, boolean isPersistent) throws Exception {
+    public static Dataframe executeLocalQuery(ExecutionParam executeParam, Dataframes dataframes, boolean isPersistent,Date expire) throws Exception {
         String url = getConnectionUrl(isPersistent, dataframes.getKey());
         //字符串常量池中存在对应字面量，则intern()方法返回该字面量的地址；如果不存在，则创建一个对应的字面量，并返回该字面量的地址
         synchronized (url.intern()) {
-            return isPersistent ? executeInLocalDB( executeParam, dataframes, null) : executeInMemDB(executeParam, dataframes);
+            return isPersistent ? executeInLocalDB( executeParam, dataframes, expire) : executeInMemDB(executeParam, dataframes);
         }
     }
 
@@ -91,7 +90,7 @@ public class LocalPersistentDB {
                 }
 
             }
-            return execute(connection, executeParam);
+            return execute(connection, executeParam,dataframes);
         }
     }
 
@@ -125,7 +124,8 @@ public class LocalPersistentDB {
             for (Dataframe dataframe : dataframes.getDataframes()) {
                 registerDataAsTable(dataframe, connection);
             }
-            return execute(connection, executeParam);
+            //注册表持久化
+            return execute(connection, executeParam,dataframes);
         } finally {
             try {
                 connection.close();
@@ -140,9 +140,9 @@ public class LocalPersistentDB {
 
     }
 
-    private static Dataframe execute(Connection connection, ExecutionParam executeParam) throws Exception {
-        //TODO 语言解析器
-        String sql = executeParam.getSql();
+    private static Dataframe execute(Connection connection, ExecutionParam executeParam,Dataframes dataframes) throws Exception {
+        //TODO 语言解析器 没有拼接出对应SQL
+        String sql = buildSql(executeParam,dataframes);
         log.debug(sql);
 
         ResultSet resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
@@ -157,6 +157,11 @@ public class LocalPersistentDB {
         dataframe.setScript(sql);
         return dataframe;
 
+    }
+
+    private static String buildSql(ExecutionParam executeParam,Dataframes dataframes) {
+        String sql = "SELECT *  FROM  ( SELECT * FROM `"+ dataframes.getDataframes().get(0).getName() +"` )  AS `DATART_VTABLE`";
+        return sql;
     }
 
     /**
@@ -185,6 +190,7 @@ public class LocalPersistentDB {
         // register temporary table
         String sql = String.format(CREATE_TEMP_TABLE, dataframe.getName(), dataframe.getId());
         try {
+            System.out.println("-----"+sql);
             connection.prepareStatement(sql).execute();
         } catch (Exception e) {
             //忽略重复创建表导致的异常
@@ -214,7 +220,7 @@ public class LocalPersistentDB {
     private static void createFunctionTableIfNotExists(Connection connection) {
         try {
             Statement statement = connection.createStatement();
-            statement.execute("CREATE ALIAS FUNCTION_TABLE  FOR \"com.cn.jmw.data.provider.localdb.dataframeTable\"");
+            statement.execute("CREATE ALIAS FUNCTION_TABLE  FOR \"com.cn.jmw.data.provider.base.local.LocalPersistentDB.dataframeTable\"");
         } catch (SQLException ignored) {
         }
     }

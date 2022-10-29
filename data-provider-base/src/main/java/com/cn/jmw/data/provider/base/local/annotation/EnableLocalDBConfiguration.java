@@ -1,15 +1,12 @@
-package com.cn.jmw.data.provider.localdb.annotation;
+package com.cn.jmw.data.provider.base.local.annotation;
 
 import com.cn.jmw.data.provider.base.utils.StartLogPrinting;
-import com.cn.jmw.data.provider.localdb.LocalPersistentDB;
+import com.cn.jmw.data.provider.base.local.LocalPersistentDB;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author jmw

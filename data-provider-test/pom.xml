@@ -38,15 +38,16 @@
 
         <dependency>
             <groupId>com.cn.jmw</groupId>
-            <artifactId>data-provider-jdbc</artifactId>
+            <artifactId>data-provider-es</artifactId>
             <version>1.0.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>com.cn.jmw</groupId>
-            <artifactId>data-provider-localdb</artifactId>
+            <artifactId>data-provider-jdbc</artifactId>
             <version>1.0.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

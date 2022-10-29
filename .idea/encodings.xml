@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/data-provider-base/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/data-provider-base/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/data-provider-es/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/data-provider-es/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/data-provider-jdbc/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/data-provider-localdb/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/data-provider-test/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

@@ -28,7 +28,6 @@
         <module>data-provider-jdbc</module>
         <module>data-provider-test</module>
         <module>data-provider-es</module>
-        <module>data-provider-localdb</module>
     </modules>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
@@ -140,6 +139,17 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.200</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-client</artifactId>
+                <version>7.10.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>7.10.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

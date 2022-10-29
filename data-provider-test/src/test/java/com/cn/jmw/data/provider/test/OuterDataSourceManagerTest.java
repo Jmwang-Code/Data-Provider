@@ -6,6 +6,7 @@ import com.cn.jmw.data.provider.base.entity.common.DataSourceTypeEnum;
 import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import com.cn.jmw.data.provider.base.response.ResponseBody;
+import com.cn.jmw.data.provider.base.response.ResponseData;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
@@ -77,14 +78,14 @@ public class OuterDataSourceManagerTest {
 
     @Test
     public void testConnection() throws Exception {
-        ResponseBody responseBody = outerDataSourceManager.testConnection(source);
+        ResponseData responseData = outerDataSourceManager.testConnection(source);
 
-        ResponseBody responseBody2 = outerDataSourceManager.testConnection(source);
-        System.out.println(responseBody +""+ responseBody2);
+//        ResponseBody responseBody2 = outerDataSourceManager.testConnection(source);
+        System.out.println(responseData);
     }
 
     @Test
-    public void execute() throws SQLException, IOException {
+    public void execute() throws Exception {
         ResponseBody execute = outerDataSourceManager.execute(source, ExecutionParam.builder().sql("SELECT * FROM role").build());
         System.out.println(execute.getStatus());
         Files.write(Paths.get("C:\\Users\\jmw\\Desktop\\1.txt"),execute.getStatus().toString().getBytes("UTF-8"));

@@ -30,7 +30,7 @@ public abstract class DataProviderAbstractFactory {
     /**
      * Generally,only execution
      */
-    public abstract Dataframe execute(DataSourceProviderEntity source, ExecutionParam executionParam) throws SQLException;
+    public abstract Dataframe execute(DataSourceProviderEntity source, ExecutionParam executionParam) throws Exception;
 
     /**
      * 配置文件加载功能 - 获取JSON配置文件名

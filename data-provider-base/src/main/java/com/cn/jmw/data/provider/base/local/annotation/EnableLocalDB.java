@@ -1,4 +1,4 @@
-package com.cn.jmw.data.provider.localdb.annotation;
+package com.cn.jmw.data.provider.base.local.annotation;
 
 import org.springframework.context.annotation.Import;
 

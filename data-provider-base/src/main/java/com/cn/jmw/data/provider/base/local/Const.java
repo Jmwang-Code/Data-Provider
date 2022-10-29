@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.cn.jmw.data.provider.localdb;
+package com.cn.jmw.data.provider.base.local;
 
 
 import java.util.regex.Pattern;

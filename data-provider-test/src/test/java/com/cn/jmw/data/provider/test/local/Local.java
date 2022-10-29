@@ -1,8 +1,7 @@
 package com.cn.jmw.data.provider.test.local;
 
-import com.cn.jmw.data.provider.localdb.annotation.EnableLocalDB;
+import com.cn.jmw.data.provider.base.local.annotation.EnableLocalDB;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**

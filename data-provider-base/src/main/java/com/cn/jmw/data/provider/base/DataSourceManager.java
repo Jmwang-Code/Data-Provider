@@ -3,6 +3,7 @@ package com.cn.jmw.data.provider.base;
 import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
 import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.response.ResponseBody;
+import com.cn.jmw.data.provider.base.response.ResponseData;
 
 import java.sql.SQLException;
 
@@ -20,7 +21,7 @@ interface DataSourceManager {
      * 解决各种连接测试问题
      * @Date 18:13 2022/10/8
      */
-    ResponseBody testConnection(DataSourceProviderEntity t) throws Exception;
+    ResponseData testConnection(DataSourceProviderEntity t) throws Exception;
 
     /**
      * @Author jmw
@@ -34,7 +35,7 @@ interface DataSourceManager {
      * @Description 各种准备执行逻辑
      * @Date 18:20 2022/10/8
      */
-    public ResponseBody execute(DataSourceProviderEntity source, ExecutionParam executionParam) throws SQLException;
+    public ResponseBody execute(DataSourceProviderEntity source, ExecutionParam executionParam) throws Exception;
 
 
 }

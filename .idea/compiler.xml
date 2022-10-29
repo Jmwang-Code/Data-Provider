@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="data-provider-jdbc" />
+        <module name="data-provider-base" />
+        <module name="data-provider-test" />
+        <module name="data-provider-es" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="19">
+      <module name="data-provider-localdb" target="19" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Data-Provider" options="" />
+      <module name="data-provider-base" options="-parameters" />
+      <module name="data-provider-es" options="-parameters" />
+      <module name="data-provider-jdbc" options="-parameters" />
+      <module name="data-provider-localdb" options="-parameters" />
+      <module name="data-provider-test" options="-parameters" />
+    </option>
+  </component>
+</project>

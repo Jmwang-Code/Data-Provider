@@ -4,6 +4,7 @@ import com.cn.jmw.data.provider.base.entity.DataSourceProviderEntity;
 import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractFactory;
 import com.cn.jmw.data.provider.base.response.ResponseBody;
+import com.cn.jmw.data.provider.base.response.ResponseData;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -27,16 +28,16 @@ public class OuterDataSourceManager extends DataSourceExecuteOptimizer implement
     public Map<String, DataProviderAbstractFactory> cachedDataProviderAbstractFactories = new ConcurrentSkipListMap<>();
 
     @Override
-    public ResponseBody testConnection(DataSourceProviderEntity source) throws Exception {
+    public ResponseData testConnection(DataSourceProviderEntity source) throws Exception {
         //获取服务
-        return ResponseBody
+        return ResponseData
                 .builder()
-                .status(ResponseBody.jsonConverter(getDataProvider(source.getType()).test(source)))
+                .data(getDataProvider(source.getType()).test(source))
                 .build();
     }
 
     @Override
-    public ResponseBody execute(DataSourceProviderEntity source, ExecutionParam executionParam) throws SQLException {
+    public ResponseBody execute(DataSourceProviderEntity source, ExecutionParam executionParam) throws Exception {
         return ResponseBody
                 .builder()
                 .status(ResponseBody.jsonConverter(getDataProvider(source.getType()).execute(source,executionParam)))
