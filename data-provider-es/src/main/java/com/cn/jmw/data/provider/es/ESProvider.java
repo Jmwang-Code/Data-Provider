@@ -24,7 +24,6 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,7 +51,7 @@ public class ESProvider extends DataProviderAbstractDefaultFactory {
     public Dataframes fullLoadOfDataSource(DataSourceProviderEntity config) throws Exception {
         //转换请求参数
         List<ESRequestParam> esRequestParams = convertRequestParams(config);
-        if (CollectionUtils.isEmpty(esRequestParams)) {
+        if (esRequestParams.size()==0 || esRequestParams==null) {
             return Dataframes.of(config.getSourceId());
         }
         //获取MD5key

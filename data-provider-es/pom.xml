@@ -18,6 +18,21 @@
         </dependency>
 
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-client</artifactId>
         </dependency>
@@ -33,5 +48,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
+    <distributionManagement>
+        <snapshotRepository>
+            <id>my-maven-releases</id>
+            <url>http://www.jmwang-code.top/repository/my-maven/</url>
+        </snapshotRepository>
+        <repository>
+            <id>my-maven-snapshots</id>
+            <url>http://www.jmwang-code.top/repository/my-maven/</url>
+        </repository>
+    </distributionManagement>
 </project>

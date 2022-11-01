@@ -38,6 +38,15 @@ public class OuterDataSourceManager extends DataSourceExecuteOptimizer implement
 
     @Override
     public ResponseBody execute(DataSourceProviderEntity source, ExecutionParam executionParam) throws Exception {
+        /**
+         * TODO
+         * 1.响应预处理
+         * 2.获取提供者服务
+         * 3.调用提供者服务
+         * TODO 4.缓存机制
+         * 5.并发优化
+         */
+
         return ResponseBody
                 .builder()
                 .status(ResponseBody.jsonConverter(getDataProvider(source.getType()).execute(source,executionParam)))

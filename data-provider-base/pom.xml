@@ -61,11 +61,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>my-maven-releases</id>
-            <url>http://152.136.154.249:8081/repository/my-maven/</url>
+            <url>http://www.jmwang-code.top/repository/my-maven/</url>
         </snapshotRepository>
         <repository>
             <id>my-maven-snapshots</id>
-            <url>http://152.136.154.249:8081/repository/my-maven/</url>
+            <url>http://www.jmwang-code.top/repository/my-maven/</url>
         </repository>
     </distributionManagement>
 </project>
