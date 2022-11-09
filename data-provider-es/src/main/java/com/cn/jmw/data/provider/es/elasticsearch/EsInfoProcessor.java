@@ -45,63 +45,10 @@ public class EsInfoProcessor {
 
     public Dataframe fetchAndParse() throws IOException {
         Dataframe dataframe = new Dataframe();
-        RestHighLevelClient init = init();
-
+        RestHighLevelClient restHighLevelClient = init();
+        esRequestParam.setRestHighLevelClient(restHighLevelClient);
         Return aReturn = esRequestParam.getMode().getReturn();
-        Dataframe start = aReturn.init(esRequestParam).start(dataframe);
-        //TODO
-
-        SearchRequest request = null;
-        //1、查询索引中全部数据
-        switch (esRequestParam.getMode()) {
-            case INDEX_ID:
-                request = new SearchRequest(esRequestParam.getIndex());
-                request.source(new SearchSourceBuilder().query(QueryBuilders.termQuery("_id", esRequestParam.getId())));
-                break;
-            case INDEX_ALL: {
-//                    request = new GetRequest(esRequestParam.getIndex());
-                request = new SearchRequest();
-                request.indices(esRequestParam.getIndex());
-                request.source(new SearchSourceBuilder().query(QueryBuilders.matchAllQuery()));
-                break;
-            }
-            default:
-                log.error("The elasticSearch index or id location failed");
-        }
-
-        SearchResponse response = init.search(request, RequestOptions.DEFAULT);
-
-        SearchHits hits = response.getHits();
-
-        dataframe.setColumns(new ArrayList<>());
-        dataframe.setRows(new ArrayList<>());
-        List<Column> columns = dataframe.getColumns();
-        List<List<Object>> rows = dataframe.getRows();
-
-        SearchHit at = hits.getAt(0);
-        Map<String, Object> sourceAsMap1 = at.getSourceAsMap();
-        Iterator<String> iterator1 = at.getSourceAsMap().keySet().iterator();
-        while (iterator1.hasNext()) {
-            //拿到key值
-            String key = iterator1.next();
-            Column column = new Column();
-            column.setType(ValueType.STRING);
-            column.setName(new String[]{key});
-            columns.add(column);
-        }
-
-        for (SearchHit hit : hits) {
-            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
-            Iterator<String> iterator = hit.getSourceAsMap().keySet().iterator();
-            List<Object> objects = new ArrayList<>();
-            while (iterator.hasNext()) {
-                //拿到key值
-                String key = iterator.next();
-                objects.add(sourceAsMap.get(key));
-            }
-            rows.add(objects);
-        }
-
+        dataframe = aReturn.init(esRequestParam).start(dataframe);
         return dataframe;
     }
 

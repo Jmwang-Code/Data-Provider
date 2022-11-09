@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.elasticsearch.client.RestHighLevelClient;
 
 import java.util.StringJoiner;
 
@@ -30,7 +31,15 @@ public class EsRequestParam {
     /** 协议 */
     private String schema;
 
+    // key1.key1.1
     private String query;
+
+    //精确查询boolean、int、double、string
+    private Object value;
+
+    private Integer pageStart;
+
+    private Integer pageEnd;
 
     private String password;
 
@@ -62,6 +71,9 @@ public class EsRequestParam {
     private String id;
 
     private Mode mode;
+
+    private RestHighLevelClient restHighLevelClient;
+
 
     public String toCacheKey() {
         return new StringJoiner(":")

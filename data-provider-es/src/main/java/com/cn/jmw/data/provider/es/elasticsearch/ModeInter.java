@@ -3,6 +3,7 @@ package com.cn.jmw.data.provider.es.elasticsearch;
 import com.cn.jmw.data.provider.es.elasticsearch.research.Return;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 
 /**
  * @author jmw
@@ -14,9 +15,9 @@ public interface ModeInter {
 
     /**
      * @Description 获取Return对象
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * @Author jmw
      * @Date 17:10 2022/11/7
      */
@@ -30,5 +31,5 @@ public interface ModeInter {
      * @Author jmw
      * @Date 17:51 2022/11/7
      */
-    SearchRequest setReturn(EsRequestParam esRequestParam);
+    SearchResponse initReturn(EsRequestParam esRequestParam);
 }
