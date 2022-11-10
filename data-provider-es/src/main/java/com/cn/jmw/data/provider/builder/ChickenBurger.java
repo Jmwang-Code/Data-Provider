@@ -6,7 +6,7 @@ package com.cn.jmw.data.provider.builder;
  * @date 2022年11月09日 17:37
  * @Version 1.0
  */
-public class ChickenBurger extends Burger {
+public class ChickenBurger extends PagePlugin {
 
     @Override
     public float price() {

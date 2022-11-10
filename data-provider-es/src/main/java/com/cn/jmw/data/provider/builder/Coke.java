@@ -6,7 +6,7 @@ package com.cn.jmw.data.provider.builder;
  * @date 2022年11月09日 17:37
  * @Version 1.0
  */
-public class Coke extends ColdDrink {
+public class Coke extends SortPlugin {
 
     @Override
     public float price() {

@@ -12,6 +12,7 @@ import com.cn.jmw.data.provider.es.elasticsearch.Mode;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import com.cn.jmw.data.provider.es.entity.ResponseData;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.junit.Test;
 import org.springframework.util.CollectionUtils;
 

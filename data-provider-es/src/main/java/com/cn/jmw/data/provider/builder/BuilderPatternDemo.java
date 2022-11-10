@@ -1,5 +1,7 @@
 package com.cn.jmw.data.provider.builder;
 
+import com.cn.jmw.data.provider.es.entity.EsRequestParam;
+
 /**
  * @author jmw
  * @Description TODO
@@ -8,14 +10,15 @@ package com.cn.jmw.data.provider.builder;
  */
 public class BuilderPatternDemo {
     public static void main(String[] args) {
-        MealBuilder mealBuilder = new MealBuilder();
+        EsRequestParam esRequestParam = new EsRequestParam();
+        ElasticSearchBuilder elasticSearchBuilder = new ElasticSearchBuilder();
 
-        Meal vegMeal = mealBuilder.prepareVegMeal();
+        ElasticSearchPluginManager vegMeal = elasticSearchBuilder.prepareVegMeal(esRequestParam);
         System.out.println("Veg Meal");
         vegMeal.showItems();
         System.out.println("Total Cost: " +vegMeal.getCost());
 
-        Meal nonVegMeal = mealBuilder.prepareNonVegMeal();
+        ElasticSearchPluginManager nonVegMeal = elasticSearchBuilder.prepareNonVegMeal(esRequestParam);
         System.out.println("\n\nNon-Veg Meal");
         nonVegMeal.showItems();
         System.out.println("Total Cost: " +nonVegMeal.getCost());

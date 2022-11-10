@@ -6,7 +6,7 @@ package com.cn.jmw.data.provider.builder;
  * @date 2022年11月09日 17:35
  * @Version 1.0
  */
-public abstract class Burger implements Item {
+public abstract class PagePlugin implements Plugins {
 
     @Override
     public Packing packing() {

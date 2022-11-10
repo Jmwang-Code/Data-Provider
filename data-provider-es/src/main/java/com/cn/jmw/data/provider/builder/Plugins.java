@@ -6,7 +6,7 @@ package com.cn.jmw.data.provider.builder;
  * @date 2022年11月09日 17:34
  * @Version 1.0
  */
-public interface Item {
+public interface Plugins {
     public String name();
     public Packing packing();
     public float price();

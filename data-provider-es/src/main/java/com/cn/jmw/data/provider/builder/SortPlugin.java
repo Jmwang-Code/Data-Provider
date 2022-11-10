@@ -6,7 +6,7 @@ package com.cn.jmw.data.provider.builder;
  * @date 2022年11月09日 17:36
  * @Version 1.0
  */
-public abstract class ColdDrink implements Item {
+public abstract class SortPlugin implements Plugins {
 
     @Override
     public Packing packing() {
