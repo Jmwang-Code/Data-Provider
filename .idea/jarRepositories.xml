@@ -24,6 +24,11 @@
     <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
+      <option name="url" value="https://www.jmwang-code.top/repository/maven-public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
       <option name="url" value="http://152.136.154.249:8081/repository/maven-public/" />
     </remote-repository>
   </component>
