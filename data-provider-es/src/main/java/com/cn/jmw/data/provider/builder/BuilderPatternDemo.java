@@ -11,7 +11,7 @@ import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 public class BuilderPatternDemo {
     public static void main(String[] args) {
         EsRequestParam esRequestParam = new EsRequestParam();
-        ElasticSearchBuilder elasticSearchBuilder = new ElasticSearchBuilder();
+        ElasticSearchBuilder elasticSearchBuilder = new ElasticSearchBuilder(esRequestParam);
 
         ElasticSearchPluginManager vegMeal = elasticSearchBuilder.prepareVegMeal(esRequestParam);
         System.out.println("Veg Meal");
