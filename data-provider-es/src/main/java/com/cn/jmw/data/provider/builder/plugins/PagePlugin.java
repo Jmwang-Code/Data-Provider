@@ -1,4 +1,7 @@
-package com.cn.jmw.data.provider.builder;
+package com.cn.jmw.data.provider.builder.plugins;
+
+import com.cn.jmw.data.provider.builder.packing.Packing;
+import com.cn.jmw.data.provider.builder.packing.PageSelector;
 
 /**
  * @author jmw
@@ -10,9 +13,10 @@ public abstract class PagePlugin implements Plugins {
 
     @Override
     public Packing packing() {
-        return new Wrapper();
+        return new PageSelector();
     }
 
     @Override
     public abstract float price();
+
 }

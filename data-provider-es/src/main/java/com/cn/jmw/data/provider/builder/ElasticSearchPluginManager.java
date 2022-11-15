@@ -6,6 +6,7 @@ package com.cn.jmw.data.provider.builder;
  * @date 2022年11月09日 17:38
  * @Version 1.0
  */
+import com.cn.jmw.data.provider.builder.plugins.Plugins;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class ElasticSearchPluginManager {
     public void showItems(){
         for (Plugins item : items) {
             System.out.print("Item : "+item.name());
-            System.out.print(", Packing : "+item.packing().pack());
+            System.out.print(", Packing : "+item.packing().selecting());
             System.out.println(", Price : "+item.price());
         }
     }

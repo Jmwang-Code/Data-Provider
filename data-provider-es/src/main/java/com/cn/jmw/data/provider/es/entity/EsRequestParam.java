@@ -37,9 +37,14 @@ public class EsRequestParam {
     //精确查询boolean、int、double、string
     private Object value;
 
+    //起始页
     private Integer pageStart;
 
+    //结束页
     private Integer pageEnd;
+
+    //长度
+    private Integer size;
 
     private String password;
 
