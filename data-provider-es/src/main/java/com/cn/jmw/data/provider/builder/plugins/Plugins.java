@@ -1,4 +1,6 @@
-package com.cn.jmw.data.provider.builder;
+package com.cn.jmw.data.provider.builder.plugins;
+
+import com.cn.jmw.data.provider.builder.packing.Packing;
 
 /**
  * @author jmw
