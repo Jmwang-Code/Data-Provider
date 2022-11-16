@@ -60,7 +60,7 @@ public class ElasticSearchBuilder {
 
     public ElasticSearchPluginManager prepareVegMeal(EsRequestParam esRequestParam) {
         ElasticSearchPluginManager meal = new ElasticSearchPluginManager(esRequestParam);
-        meal.addItem(FromSizePage.builder().from(esRequestParam.getPageEnd()).build());
+        meal.addItem(FromSizePage.builder().from(esRequestParam.getPageEnd()).size(esRequestParam.getSize()).build());
         meal.addItem(new Ascending());
         return meal;
     }

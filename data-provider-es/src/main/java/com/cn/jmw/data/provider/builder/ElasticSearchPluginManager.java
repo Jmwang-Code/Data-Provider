@@ -25,19 +25,14 @@ public class ElasticSearchPluginManager {
         items.add(item);
     }
 
-    public float getCost(){
-        float cost = 0.0f;
-        for (Plugins item : items) {
-            cost += item.price();
-        }
-        return cost;
+    public float function(){
+        return 0f;
     }
 
     public void showItems(){
         for (Plugins item : items) {
-            System.out.print("Item : "+item.name());
-            System.out.print(", Packing : "+item.packing().selecting());
-            System.out.println(", Price : "+item.price());
+            System.out.print("Item : "+item.build());
+//            System.out.print(", Packing : "+item.packing().selecting());
         }
     }
 }
