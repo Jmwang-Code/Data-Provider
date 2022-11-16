@@ -11,12 +11,8 @@ import com.cn.jmw.data.provider.builder.plugins.SortPlugin;
 public class Ascending extends SortPlugin {
 
     @Override
-    public float price() {
+    public float build() {
         return 30.0f;
     }
 
-    @Override
-    public String name() {
-        return "Coke";
-    }
 }
