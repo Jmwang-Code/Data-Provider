@@ -11,12 +11,8 @@ import com.cn.jmw.data.provider.builder.plugins.PagePlugin;
 public class ScrollPage extends PagePlugin {
 
     @Override
-    public float price() {
+    public float build() {
         return 50.5f;
     }
 
-    @Override
-    public String name() {
-        return "Chicken Burger";
-    }
 }

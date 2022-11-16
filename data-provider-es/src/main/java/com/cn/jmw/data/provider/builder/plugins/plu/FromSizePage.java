@@ -18,12 +18,8 @@ public class FromSizePage extends PagePlugin {
     private int size;
 
     @Override
-    public float price() {
+    public float build() {
         return 25.0f;
     }
 
-    @Override
-    public String name() {
-        return "Veg Burger";
-    }
 }

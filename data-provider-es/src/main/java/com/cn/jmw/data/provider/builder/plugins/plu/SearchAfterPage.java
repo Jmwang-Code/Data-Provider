@@ -17,12 +17,8 @@ public class SearchAfterPage extends PagePlugin {
     private int from;
 
     @Override
-    public float price() {
+    public float build() {
         return 25.0f;
     }
 
-    @Override
-    public String name() {
-        return "Veg Burger";
-    }
 }
