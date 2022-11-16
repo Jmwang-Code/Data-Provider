@@ -17,5 +17,5 @@ public abstract class SortPlugin implements Plugins {
     }
 
     @Override
-    public abstract float price();
+    public abstract float build();
 }

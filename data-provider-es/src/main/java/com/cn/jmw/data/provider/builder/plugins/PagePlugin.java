@@ -17,6 +17,6 @@ public abstract class PagePlugin implements Plugins {
     }
 
     @Override
-    public abstract float price();
+    public abstract float build();
 
 }

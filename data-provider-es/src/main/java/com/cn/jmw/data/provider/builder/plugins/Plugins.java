@@ -9,7 +9,6 @@ import com.cn.jmw.data.provider.builder.packing.Packing;
  * @Version 1.0
  */
 public interface Plugins {
-    public String name();
     public Packing packing();
-    public float price();
+    public float build();
 }
