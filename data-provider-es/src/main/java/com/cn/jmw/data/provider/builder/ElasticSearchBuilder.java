@@ -60,15 +60,15 @@ public class ElasticSearchBuilder {
 
     public ElasticSearchPluginManager prepareVegMeal(EsRequestParam esRequestParam) {
         ElasticSearchPluginManager meal = new ElasticSearchPluginManager(esRequestParam);
-        meal.addItem(FromSizePage.builder().from(esRequestParam.getPageEnd()).size(esRequestParam.getSize()).build());
-        meal.addItem(new Ascending());
+        meal.addItem(FromSizePage.builder().build());
+//        meal.addItem(new Ascending());
         return meal;
     }
 
     public ElasticSearchPluginManager prepareNonVegMeal(EsRequestParam esRequestParam) {
         ElasticSearchPluginManager meal = new ElasticSearchPluginManager(esRequestParam);
-        meal.addItem(new ScrollPage());
-        meal.addItem(new Descending());
+//        meal.addItem(new ScrollPage());
+//        meal.addItem(new Descending());
         return meal;
     }
 }

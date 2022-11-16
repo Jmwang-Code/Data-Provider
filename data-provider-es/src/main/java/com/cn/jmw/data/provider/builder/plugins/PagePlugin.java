@@ -9,7 +9,8 @@ import com.cn.jmw.data.provider.builder.packing.PageSelector;
  * @date 2022年11月09日 17:35
  * @Version 1.0
  */
-public abstract class PagePlugin implements Plugins {
+public abstract class PagePlugin extends PluginsAbstract {
+
 
     @Override
     public Packing packing() {
