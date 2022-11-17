@@ -1,4 +1,4 @@
-package com.cn.jmw.data.provider.builder.plugins.plu;
+package com.cn.jmw.data.provider.builder.plugins.plu.page;
 
 import com.cn.jmw.data.provider.builder.plugins.PagePlugin;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.elasticsearch.client.RestHighLevelClient;
 
 /**
  * @author jmw
@@ -15,7 +16,6 @@ import lombok.experimental.SuperBuilder;
  * @Version 1.0
  */
 @Data
-@Builder
 //@SuperBuilder
 public class FromSizePage extends PagePlugin {
 
@@ -25,13 +25,16 @@ public class FromSizePage extends PagePlugin {
     @Builder
     public FromSizePage(int from,int size,EsRequestParam esRequestParam){
         super.esRequestParam = esRequestParam;
-        this.from = from;
-        this.size = size;
+//        this.from = from;
+//        this.size = size;
+        this.from = esRequestParam.getPageStart();
+        this.size = esRequestParam.getSize();
     }
 
     @Override
-    public float build() {
-        return 25.0f;
+    public void append() {
+        searchSourceBuilder.from(from);
+        searchSourceBuilder.size(size);
     }
 
 }

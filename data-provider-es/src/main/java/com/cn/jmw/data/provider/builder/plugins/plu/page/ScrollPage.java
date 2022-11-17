@@ -1,4 +1,4 @@
-package com.cn.jmw.data.provider.builder.plugins.plu;
+package com.cn.jmw.data.provider.builder.plugins.plu.page;
 
 import com.cn.jmw.data.provider.builder.plugins.PagePlugin;
 
@@ -11,8 +11,8 @@ import com.cn.jmw.data.provider.builder.plugins.PagePlugin;
 public class ScrollPage extends PagePlugin {
 
     @Override
-    public float build() {
-        return 50.5f;
+    public void append() {
+
     }
 
 }

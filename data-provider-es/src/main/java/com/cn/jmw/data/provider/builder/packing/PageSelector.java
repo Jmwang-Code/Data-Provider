@@ -1,8 +1,7 @@
 package com.cn.jmw.data.provider.builder.packing;
 
-import com.cn.jmw.data.provider.builder.plugins.PagePlugin;
 import com.cn.jmw.data.provider.builder.plugins.Plugins;
-import com.cn.jmw.data.provider.builder.plugins.plu.FromSizePage;
+import com.cn.jmw.data.provider.builder.plugins.plu.page.FromSizePage;
 
 /**
  * @author jmw

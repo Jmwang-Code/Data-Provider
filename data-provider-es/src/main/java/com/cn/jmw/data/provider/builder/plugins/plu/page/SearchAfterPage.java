@@ -1,4 +1,4 @@
-package com.cn.jmw.data.provider.builder.plugins.plu;
+package com.cn.jmw.data.provider.builder.plugins.plu.page;
 
 import com.cn.jmw.data.provider.builder.plugins.PagePlugin;
 import lombok.Builder;
@@ -17,8 +17,7 @@ public class SearchAfterPage extends PagePlugin {
     private int from;
 
     @Override
-    public float build() {
-        return 25.0f;
+    public void append() {
     }
 
 }

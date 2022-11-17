@@ -1,4 +1,4 @@
-package com.cn.jmw.data.provider.builder.plugins.plu;
+package com.cn.jmw.data.provider.builder.plugins.plu.sort;
 
 import com.cn.jmw.data.provider.builder.plugins.SortPlugin;
 
@@ -11,8 +11,8 @@ import com.cn.jmw.data.provider.builder.plugins.SortPlugin;
 public class Ascending extends SortPlugin {
 
     @Override
-    public float build() {
-        return 30.0f;
+    public void append() {
+
     }
 
 }

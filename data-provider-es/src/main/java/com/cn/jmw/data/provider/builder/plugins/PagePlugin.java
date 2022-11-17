@@ -11,13 +11,7 @@ import com.cn.jmw.data.provider.builder.packing.PageSelector;
  */
 public abstract class PagePlugin extends PluginsAbstract {
 
-
     @Override
-    public Packing packing() {
-        return new PageSelector();
-    }
-
-    @Override
-    public abstract float build();
+    public abstract void append();
 
 }

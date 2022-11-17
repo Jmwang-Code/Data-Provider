@@ -12,10 +12,5 @@ import com.cn.jmw.data.provider.builder.packing.Packing;
 public abstract class SortPlugin extends PluginsAbstract {
 
     @Override
-    public Packing packing() {
-        return new Bottle();
-    }
-
-    @Override
-    public abstract float build();
+    public abstract void append();
 }

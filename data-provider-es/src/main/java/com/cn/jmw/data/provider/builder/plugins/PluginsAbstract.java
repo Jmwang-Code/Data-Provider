@@ -1,6 +1,12 @@
 package com.cn.jmw.data.provider.builder.plugins;
 
+import com.cn.jmw.data.provider.builder.packing.Packing;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+
+import java.io.IOException;
 
 /**
  * @author jmw
@@ -11,6 +17,7 @@ import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 public abstract class PluginsAbstract implements Plugins{
 
     public EsRequestParam esRequestParam;
-
+    public SearchRequest searchRequest = new SearchRequest();
+    public SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
 }

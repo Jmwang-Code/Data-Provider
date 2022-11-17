@@ -1,7 +1,6 @@
 package com.cn.jmw.data.provider.builder.plugins;
 
 import com.cn.jmw.data.provider.builder.packing.Packing;
-import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 
 /**
  * @author jmw
@@ -11,6 +10,6 @@ import com.cn.jmw.data.provider.es.entity.EsRequestParam;
  */
 public interface Plugins {
 
-    public Packing packing();
-    public float build();
+    public void append();
+
 }

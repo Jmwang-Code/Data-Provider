@@ -1,22 +1,29 @@
 package com.cn.jmw.data.provider.builder;
 
-import com.cn.jmw.data.provider.builder.plugins.plu.ScrollPage;
-import com.cn.jmw.data.provider.builder.plugins.plu.Ascending;
-import com.cn.jmw.data.provider.builder.plugins.plu.Descending;
-import com.cn.jmw.data.provider.builder.plugins.plu.FromSizePage;
+import com.cn.jmw.data.provider.builder.packing.Packing;
+import com.cn.jmw.data.provider.builder.plugins.Close;
+import com.cn.jmw.data.provider.builder.plugins.ClosePlugin;
+import com.cn.jmw.data.provider.builder.plugins.plu.page.FromSizePage;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
+import lombok.Data;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Data
 /**
  * @author jmw
  * @Description TODO
@@ -28,6 +35,7 @@ public class ElasticSearchBuilder {
     private EsRequestParam esRequestParam;
 
     public ElasticSearchBuilder(EsRequestParam esRequestParam) {
+        this.esRequestParam = esRequestParam;
         List<HttpHost> hostLists = new ArrayList<>();
         String[] hostList = esRequestParam.getAddress().split(",");
         for (String addr : hostList) {
@@ -58,17 +66,24 @@ public class ElasticSearchBuilder {
         esRequestParam.setRestHighLevelClient(new RestHighLevelClient(builder));
     }
 
-    public ElasticSearchPluginManager prepareVegMeal(EsRequestParam esRequestParam) {
+    public ElasticSearchPluginManager prepareVegMeal() {
         ElasticSearchPluginManager meal = new ElasticSearchPluginManager(esRequestParam);
-        meal.addItem(FromSizePage.builder().build());
-//        meal.addItem(new Ascending());
+        meal.addItem(FromSizePage.builder().esRequestParam(esRequestParam).build());
+        meal.addItem(new ClosePlugin() {
+            @Override
+            public void append() {
+                meal.clones();
+            }
+        });
         return meal;
     }
 
-    public ElasticSearchPluginManager prepareNonVegMeal(EsRequestParam esRequestParam) {
+    public ElasticSearchPluginManager prepareNonVegMeal() {
         ElasticSearchPluginManager meal = new ElasticSearchPluginManager(esRequestParam);
 //        meal.addItem(new ScrollPage());
 //        meal.addItem(new Descending());
         return meal;
     }
+
+
 }
