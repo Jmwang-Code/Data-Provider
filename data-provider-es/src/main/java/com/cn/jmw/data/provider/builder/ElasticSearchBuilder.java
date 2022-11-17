@@ -68,22 +68,10 @@ public class ElasticSearchBuilder {
 
     public ElasticSearchPluginManager prepareVegMeal() {
         ElasticSearchPluginManager meal = new ElasticSearchPluginManager(esRequestParam);
+        //TODO 中间需要加一层 去通过ES参数 判断自适应Plugins
         meal.addItem(FromSizePage.builder().esRequestParam(esRequestParam).build());
-        meal.addItem(new ClosePlugin() {
-            @Override
-            public void append() {
-                meal.clones();
-            }
-        });
+        meal.addItem(ClosePlugin.builder().build());
         return meal;
     }
-
-    public ElasticSearchPluginManager prepareNonVegMeal() {
-        ElasticSearchPluginManager meal = new ElasticSearchPluginManager(esRequestParam);
-//        meal.addItem(new ScrollPage());
-//        meal.addItem(new Descending());
-        return meal;
-    }
-
 
 }
