@@ -16,8 +16,8 @@ import java.io.IOException;
  */
 public abstract class PluginsAbstract implements Plugins{
 
-    public EsRequestParam esRequestParam;
-    public SearchRequest searchRequest = new SearchRequest();
-    public SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+//    public EsRequestParam esRequestParam;
+//    public SearchRequest searchRequest = new SearchRequest();
+//    public SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
 }

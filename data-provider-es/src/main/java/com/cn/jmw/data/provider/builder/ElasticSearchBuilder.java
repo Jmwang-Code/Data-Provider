@@ -1,8 +1,10 @@
 package com.cn.jmw.data.provider.builder;
 
+import com.cn.jmw.data.provider.ThreadLocalCache;
 import com.cn.jmw.data.provider.builder.packing.Packing;
 import com.cn.jmw.data.provider.builder.plugins.Close;
 import com.cn.jmw.data.provider.builder.plugins.ClosePlugin;
+import com.cn.jmw.data.provider.builder.plugins.Plugins;
 import com.cn.jmw.data.provider.builder.plugins.plu.page.FromSizePage;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import lombok.Data;
@@ -32,11 +34,12 @@ import java.util.List;
  */
 public class ElasticSearchBuilder {
 
-    private EsRequestParam esRequestParam;
+    private ThreadLocalCache threadLocalCache;
 
-    public ElasticSearchBuilder(EsRequestParam esRequestParam) {
-        this.esRequestParam = esRequestParam;
+    public ElasticSearchBuilder(ThreadLocalCache threadLocalCache) {
+        this.threadLocalCache = threadLocalCache;
         List<HttpHost> hostLists = new ArrayList<>();
+        EsRequestParam esRequestParam = (EsRequestParam) threadLocalCache.get("esRequestParam");
         String[] hostList = esRequestParam.getAddress().split(",");
         for (String addr : hostList) {
             String host = addr.split(":")[0];
@@ -67,10 +70,11 @@ public class ElasticSearchBuilder {
     }
 
     public ElasticSearchPluginManager prepareVegMeal() {
-        ElasticSearchPluginManager meal = new ElasticSearchPluginManager(esRequestParam);
+        ElasticSearchPluginManager meal = new ElasticSearchPluginManager(threadLocalCache);
         //TODO 中间需要加一层 去通过ES参数 判断自适应Plugins
-        meal.addItem(FromSizePage.builder().esRequestParam(esRequestParam).build());
-        meal.addItem(ClosePlugin.builder().build());
+//        Plugins plugins = new FromSizePage(esRequestParam);
+        meal.addItem(new FromSizePage(threadLocalCache));
+        meal.addItem(new ClosePlugin(threadLocalCache));
         return meal;
     }
 

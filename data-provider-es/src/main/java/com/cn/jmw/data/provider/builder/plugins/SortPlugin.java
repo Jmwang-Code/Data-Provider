@@ -9,7 +9,7 @@ import com.cn.jmw.data.provider.builder.packing.Packing;
  * @date 2022年11月09日 17:36
  * @Version 1.0
  */
-public abstract class SortPlugin extends PluginsAbstract {
+public abstract class SortPlugin implements Plugins {
 
     @Override
     public abstract void append();
