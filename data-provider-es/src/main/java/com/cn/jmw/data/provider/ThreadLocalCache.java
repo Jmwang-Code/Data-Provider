@@ -30,7 +30,9 @@ public class ThreadLocalCache {
         return this;
     }
 
-    public void build(){}
+    public ThreadLocalCache build(){
+        return this;
+    }
 
     public Object get(Object key) {
         //TODO反射做控制

@@ -161,7 +161,7 @@ public enum Mode implements ModeInter {
             try {
                 // 构建查询条件
                 SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-                searchSourceBuilder.query(QueryBuilders.wildcardQuery(esRequestParam.getQuery(), (String) esRequestParam.getValue()));
+                searchSourceBuilder.query(QueryBuilders.wildcardQuery(esRequestParam.getQuery(), (String) esRequestParam.getValue()[0]));
                 // 创建查询请求对象，将查询对象配置到其中
                 SearchRequest searchRequest = new SearchRequest(esRequestParam.getIndex());
                 searchRequest.source(searchSourceBuilder);

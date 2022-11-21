@@ -1,12 +1,12 @@
-package com.cn.jmw.data.provider.builder.plugins;
+package com.cn.jmw.data.provider.builder.plugins.plu;
 
 
+import com.cn.jmw.data.provider.builder.Plugin;
 import com.cn.jmw.data.provider.ThreadLocalCache;
+import com.cn.jmw.data.provider.builder.plugins.Plugins;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
@@ -18,13 +18,13 @@ import java.io.IOException;
  */
 @Data
 @AllArgsConstructor
-public class ClosePlugin implements Plugins{
+public class ClosePlugin implements Plugins {
 
     private ThreadLocalCache threadLocalCache;
 
     @Override
     public void append() {
-        EsRequestParam esRequestParam = (EsRequestParam)threadLocalCache.get("esRequestParam");
+        EsRequestParam esRequestParam = (EsRequestParam)threadLocalCache.get(Plugin.ES_REQUEST_PARAM);
         try {
             esRequestParam.getRestHighLevelClient().close();
         } catch (IOException e) {

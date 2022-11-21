@@ -1,6 +1,5 @@
 package com.cn.jmw.data.provider.builder.packing;
 
-import com.cn.jmw.data.provider.builder.plugins.PagePlugin;
 import com.cn.jmw.data.provider.builder.plugins.Plugins;
 
 /**

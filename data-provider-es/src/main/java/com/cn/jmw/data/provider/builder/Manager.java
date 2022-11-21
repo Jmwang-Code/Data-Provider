@@ -2,11 +2,12 @@ package com.cn.jmw.data.provider.builder;
 
 
 import com.cn.jmw.data.provider.ThreadLocalCache;
+import com.cn.jmw.data.provider.builder.chain.Builder;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
-import static com.cn.jmw.data.provider.builder.Plugin.*;
 
 /**
  * @author jmw
@@ -48,21 +49,24 @@ public class Manager {
                 .index("kibana_sample_data_ecommerce")
                 .id("43_74MBeofnJbrlVzm1")
                 .username("default")
+                .sort("ASC")
+                .sortName("customer_phone")
+                .query("day_of_week")
+                .value(new String[]{"Saturday"})
                 .build());
         ThreadLocalCache threadLocalCache = new ThreadLocalCache()
-                .put(ES_REQUEST_PARAM, builderPatternManager.esRequestParam)
-                .put(SEARCH_REQUEST, builderPatternManager.searchRequest)
-                .put(SEARCH_SOURCE_BUILDER, builderPatternManager.searchSourceBuilder);
+                .put(Plugin.ES_REQUEST_PARAM, builderPatternManager.esRequestParam)
+                .put(Plugin.SEARCH_REQUEST, builderPatternManager.searchRequest)
+                .put(Plugin.SEARCH_SOURCE_BUILDER, builderPatternManager.searchSourceBuilder)
+                .build();
         ElasticSearchBuilder elasticSearchBuilder = new ElasticSearchBuilder(threadLocalCache);
         ElasticSearchPluginManager vegMeal = elasticSearchBuilder.prepareVegMeal();
         vegMeal.showItems();
         threadLocalCache.close();
+
+        Builder.builder(EsRequestParam::new)
+                .with(EsRequestParam::setName,"dog")
+                .build();
     }
 
-}
-
-enum Plugin {
-    ES_REQUEST_PARAM,
-    SEARCH_REQUEST,
-    SEARCH_SOURCE_BUILDER;
 }

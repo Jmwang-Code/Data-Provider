@@ -1,7 +1,8 @@
-package com.cn.jmw.data.provider.builder.plugins;
+package com.cn.jmw.data.provider.builder.plugins.plu;
 
 import com.cn.jmw.data.provider.builder.packing.Bottle;
 import com.cn.jmw.data.provider.builder.packing.Packing;
+import com.cn.jmw.data.provider.builder.plugins.Plugins;
 
 /**
  * @author jmw

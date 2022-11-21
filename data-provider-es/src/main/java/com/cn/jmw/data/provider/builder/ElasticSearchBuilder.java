@@ -1,11 +1,10 @@
 package com.cn.jmw.data.provider.builder;
 
 import com.cn.jmw.data.provider.ThreadLocalCache;
-import com.cn.jmw.data.provider.builder.packing.Packing;
-import com.cn.jmw.data.provider.builder.plugins.Close;
-import com.cn.jmw.data.provider.builder.plugins.ClosePlugin;
-import com.cn.jmw.data.provider.builder.plugins.Plugins;
+import com.cn.jmw.data.provider.builder.plugins.plu.ClosePlugin;
 import com.cn.jmw.data.provider.builder.plugins.plu.page.FromSizePage;
+import com.cn.jmw.data.provider.builder.plugins.plu.query.ExactQuery;
+import com.cn.jmw.data.provider.builder.plugins.plu.sort.Ascending;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import lombok.Data;
 import org.apache.http.HttpHost;
@@ -13,16 +12,13 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 @Data
@@ -39,7 +35,7 @@ public class ElasticSearchBuilder {
     public ElasticSearchBuilder(ThreadLocalCache threadLocalCache) {
         this.threadLocalCache = threadLocalCache;
         List<HttpHost> hostLists = new ArrayList<>();
-        EsRequestParam esRequestParam = (EsRequestParam) threadLocalCache.get("esRequestParam");
+        EsRequestParam esRequestParam = (EsRequestParam) threadLocalCache.get(Plugin.ES_REQUEST_PARAM);
         String[] hostList = esRequestParam.getAddress().split(",");
         for (String addr : hostList) {
             String host = addr.split(":")[0];
@@ -74,6 +70,8 @@ public class ElasticSearchBuilder {
         //TODO 中间需要加一层 去通过ES参数 判断自适应Plugins
 //        Plugins plugins = new FromSizePage(esRequestParam);
         meal.addItem(new FromSizePage(threadLocalCache));
+        meal.addItem(new Ascending(threadLocalCache));
+        meal.addItem(new ExactQuery(threadLocalCache));
         meal.addItem(new ClosePlugin(threadLocalCache));
         return meal;
     }

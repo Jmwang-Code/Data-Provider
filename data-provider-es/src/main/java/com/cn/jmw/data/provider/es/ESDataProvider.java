@@ -111,13 +111,13 @@ public class ESDataProvider extends DataProviderAbstractDefaultFactory {
         objectObjectHashMap.put("index", "kibana_sample_data_ecommerce");
         objectObjectHashMap.put("model", "indexId");//index-id
         objectObjectHashMap.put("id", "-43_74MBeofnJbrlVzm1");
-        System.out.println(ResponseData.success(providerManager.testConnection(DataSourceProviderEntity
+        System.out.println(providerManager.testConnection(DataSourceProviderEntity
                 .builder()
                 .sourceId("asdad")
                 .type("ES")
                 .name("ES")
                 .properties(objectObjectHashMap)
-                .build())));
+                .build()));
     }
 
 }

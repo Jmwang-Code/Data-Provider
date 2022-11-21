@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.search.Scroll;
 
 import java.util.StringJoiner;
 
@@ -35,7 +36,11 @@ public class EsRequestParam {
     private String query;
 
     //精确查询boolean、int、double、string
-    private Object value;
+    private String[] value;
+
+    public void setValue(String... value) {
+        this.value = value;
+    }
 
     //起始页
     private Integer pageStart;
@@ -79,6 +84,16 @@ public class EsRequestParam {
 
     private RestHighLevelClient restHighLevelClient;
 
+    private int scroll;
+
+    private String sort;
+
+    private String sortName;
+
+    /**
+     * Minutes
+     */
+    private int scrollMinutes;
 
     public String toCacheKey() {
         return new StringJoiner(":")

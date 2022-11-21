@@ -7,8 +7,6 @@ package com.cn.jmw.data.provider.builder;
  * @Version 1.0
  */
 import com.cn.jmw.data.provider.ThreadLocalCache;
-import com.cn.jmw.data.provider.builder.aop.Times;
-import com.cn.jmw.data.provider.builder.operator.Action;
 import com.cn.jmw.data.provider.builder.plugins.Close;
 import com.cn.jmw.data.provider.builder.plugins.Plugins;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
@@ -20,7 +18,7 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ElasticSearchPluginManager implements Close {
+public class ElasticSearchPluginManager {
 
     private ThreadLocalCache threadLocalCache;
 
@@ -44,16 +42,5 @@ public class ElasticSearchPluginManager implements Close {
         }
     }
 
-    @Action(name = "clones", description = "关闭函数")
-    @Override
-    public void clones(){
-        EsRequestParam esRequestParam = (EsRequestParam)threadLocalCache.get("esRequestParam");
-        RestHighLevelClient restHighLevelClient = esRequestParam.getRestHighLevelClient();
-        try {
-            if (restHighLevelClient!=null)restHighLevelClient.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }
