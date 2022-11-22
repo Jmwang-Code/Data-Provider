@@ -43,7 +43,7 @@ public class ScrollPage extends PagePlugin {
     }
 
     @Override
-    public void append() {
+    public void append(ThreadLocalCache threadLocalCache) {
         if (scrollSeconds>0){
             Scroll scroll = new Scroll(TimeValue.timeValueSeconds(scrollSeconds));
             searchRequest.scroll(scroll);

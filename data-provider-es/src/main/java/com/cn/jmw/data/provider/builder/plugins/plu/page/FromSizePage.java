@@ -22,8 +22,8 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 //@SuperBuilder
 public class FromSizePage extends PagePlugin {
 
-    private int from;
-    private int size;
+    private int from = -1;
+    private int size = -1;
 
     private EsRequestParam esRequestParam;
 
@@ -37,7 +37,7 @@ public class FromSizePage extends PagePlugin {
     }
 
     @Override
-    public void append() {
+    public void append(ThreadLocalCache threadLocalCache) {
         if (from>=0)searchSourceBuilder.from(from);
         if (size>=0)searchSourceBuilder.size(size);
     }
