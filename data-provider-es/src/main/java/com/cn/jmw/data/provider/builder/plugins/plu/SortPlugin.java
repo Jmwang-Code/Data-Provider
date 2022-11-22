@@ -1,5 +1,6 @@
 package com.cn.jmw.data.provider.builder.plugins.plu;
 
+import com.cn.jmw.data.provider.ThreadLocalCache;
 import com.cn.jmw.data.provider.builder.packing.Bottle;
 import com.cn.jmw.data.provider.builder.packing.Packing;
 import com.cn.jmw.data.provider.builder.plugins.Plugins;
@@ -13,5 +14,5 @@ import com.cn.jmw.data.provider.builder.plugins.Plugins;
 public abstract class SortPlugin implements Plugins {
 
     @Override
-    public abstract void append();
+    public abstract void append(ThreadLocalCache threadLocalCache);
 }
