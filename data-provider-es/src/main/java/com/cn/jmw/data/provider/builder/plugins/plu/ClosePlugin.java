@@ -23,7 +23,7 @@ public class ClosePlugin implements Plugins {
     private ThreadLocalCache threadLocalCache;
 
     @Override
-    public void append() {
+    public void append(ThreadLocalCache threadLocalCache) {
         EsRequestParam esRequestParam = (EsRequestParam)threadLocalCache.get(Plugin.ES_REQUEST_PARAM);
         try {
             esRequestParam.getRestHighLevelClient().close();
