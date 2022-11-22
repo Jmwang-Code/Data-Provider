@@ -3,7 +3,7 @@ package com.cn.jmw.data.provider.builder;
 import com.cn.jmw.data.provider.ThreadLocalCache;
 import com.cn.jmw.data.provider.builder.plugins.plu.ClosePlugin;
 import com.cn.jmw.data.provider.builder.plugins.plu.page.FromSizePage;
-import com.cn.jmw.data.provider.builder.plugins.plu.query.ExactQuery;
+import com.cn.jmw.data.provider.builder.plugins.plu.query.AllQuery;
 import com.cn.jmw.data.provider.builder.plugins.plu.sort.Ascending;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import lombok.Data;
@@ -71,7 +71,7 @@ public class ElasticSearchBuilder {
 //        Plugins plugins = new FromSizePage(esRequestParam);
         meal.addItem(new FromSizePage(threadLocalCache));
         meal.addItem(new Ascending(threadLocalCache));
-        meal.addItem(new ExactQuery(threadLocalCache));
+        meal.addItem(new AllQuery(threadLocalCache));
         meal.addItem(new ClosePlugin(threadLocalCache));
         return meal;
     }
