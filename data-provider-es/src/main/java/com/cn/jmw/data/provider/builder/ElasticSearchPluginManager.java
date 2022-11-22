@@ -7,14 +7,9 @@ package com.cn.jmw.data.provider.builder;
  * @Version 1.0
  */
 import com.cn.jmw.data.provider.ThreadLocalCache;
-import com.cn.jmw.data.provider.builder.plugins.Close;
 import com.cn.jmw.data.provider.builder.plugins.Plugins;
-import com.cn.jmw.data.provider.es.entity.EsRequestParam;
+import com.cn.jmw.data.provider.builder.plugins.plu.Analysis;
 import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.client.RestHighLevelClient;
-
-import java.io.IOException;
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +30,10 @@ public class ElasticSearchPluginManager {
         return 0f;
     }
 
-    public void showItems(){
+    public void showItems(ThreadLocalCache threadLocalCache){
         SearchRequest searchRequest = null;
         for (Plugins item : items) {
-            item.append();
+            item.append(threadLocalCache);
         }
     }
 
