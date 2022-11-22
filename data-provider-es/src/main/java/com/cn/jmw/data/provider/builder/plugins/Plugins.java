@@ -1,5 +1,6 @@
 package com.cn.jmw.data.provider.builder.plugins;
 
+import com.cn.jmw.data.provider.ThreadLocalCache;
 import com.cn.jmw.data.provider.builder.packing.Packing;
 
 /**
@@ -10,6 +11,6 @@ import com.cn.jmw.data.provider.builder.packing.Packing;
  */
 public interface Plugins {
 
-    public void append();
+    public void append(ThreadLocalCache threadLocalCache);
 
 }
