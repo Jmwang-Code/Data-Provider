@@ -43,13 +43,16 @@ public class EsRequestParam {
     }
 
     //起始页
-    private Integer pageStart;
+    @Builder.Default
+    private Integer pageStart = -1;
 
     //结束页
-    private Integer pageEnd;
+    @Builder.Default
+    private Integer pageEnd = -1;
 
     //长度
-    private Integer size;
+    @Builder.Default
+    private Integer size = -1;
 
     private String password;
 
@@ -94,6 +97,14 @@ public class EsRequestParam {
      * Minutes
      */
     private int scrollMinutes;
+
+    /**
+     * RangeQuery
+     */
+    private int gte;
+    private int gt;
+    private int lte;
+    private int lt;
 
     public String toCacheKey() {
         return new StringJoiner(":")

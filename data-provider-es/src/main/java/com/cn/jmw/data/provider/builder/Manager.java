@@ -2,7 +2,9 @@ package com.cn.jmw.data.provider.builder;
 
 
 import com.cn.jmw.data.provider.ThreadLocalCache;
+import com.cn.jmw.data.provider.base.entity.db.Dataframe;
 import com.cn.jmw.data.provider.builder.chain.Builder;
+import com.cn.jmw.data.provider.builder.plugins.plu.Analysis;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -28,6 +30,22 @@ public class Manager {
     }
 
     private EsRequestParam esRequestParam;
+
+    public Dataframe reData(){
+        Dataframe dataframe = null;
+        ThreadLocalCache threadLocalCache = new ThreadLocalCache()
+                .put(Plugin.ES_REQUEST_PARAM, this.esRequestParam)
+                .put(Plugin.SEARCH_REQUEST, this.searchRequest)
+                .put(Plugin.SEARCH_SOURCE_BUILDER, this.searchSourceBuilder)
+                .build();
+        ElasticSearchBuilder elasticSearchBuilder = new ElasticSearchBuilder(threadLocalCache);
+        ElasticSearchPluginManager vegMeal = elasticSearchBuilder.prepareVegMeal();
+        vegMeal.showItems(threadLocalCache);
+        Analysis.append(threadLocalCache);
+        dataframe = (Dataframe)threadLocalCache.get(Plugin.DATA_FRAME);
+        threadLocalCache.close();
+        return dataframe;
+    }
 
     /**
      * objectObjectHashMap.put(" name ", " testOne ");
@@ -61,12 +79,9 @@ public class Manager {
                 .build();
         ElasticSearchBuilder elasticSearchBuilder = new ElasticSearchBuilder(threadLocalCache);
         ElasticSearchPluginManager vegMeal = elasticSearchBuilder.prepareVegMeal();
-        vegMeal.showItems();
+        vegMeal.showItems(threadLocalCache);
         threadLocalCache.close();
 
-        Builder.builder(EsRequestParam::new)
-                .with(EsRequestParam::setName,"dog")
-                .build();
     }
 
 }

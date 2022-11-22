@@ -7,6 +7,7 @@ import com.cn.jmw.data.provider.base.entity.db.Dataframes;
 import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.entity.db.UUIDGenerator;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractDefaultFactory;
+import com.cn.jmw.data.provider.builder.Manager;
 import com.cn.jmw.data.provider.es.elasticsearch.EsInfoProcessor;
 import com.cn.jmw.data.provider.es.elasticsearch.Mode;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
@@ -74,7 +75,9 @@ public class ESDataProvider extends DataProviderAbstractDefaultFactory {
         Dataframes dataframes = Dataframes.of(dataKey);
 
         for (EsRequestParam esRequestParam : esRequestParams) {
-            Dataframe dataframe = new EsInfoProcessor(esRequestParam).fetchAndParse();
+            //TODO 在这里修改
+            Dataframe dataframe = new Manager(esRequestParam).reData();
+//            Dataframe dataframe = new EsInfoProcessor(esRequestParam).fetchAndParse();
             dataframe.setName(esRequestParam.getName()+ UUIDGenerator.generate());
             dataframes.add(dataframe);
         }
