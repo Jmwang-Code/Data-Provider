@@ -7,10 +7,14 @@ package com.cn.jmw.data.provider.builder;
  * @Version 1.0
  */
 public enum Plugin {
-
+    //ES请求参数
     ES_REQUEST_PARAM,
+    //ElasticSearch SearchRequest
     SEARCH_REQUEST,
+    //响应参数数据库
     DATA_FRAME,
+    //ElasticSearch SearchResponse
     SEARCH_RESPONSE,
+    //ElasticSearch SearchSourceBuilder
     SEARCH_SOURCE_BUILDER;
 }
