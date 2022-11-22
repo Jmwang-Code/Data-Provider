@@ -35,7 +35,7 @@ public class Ascending extends SortPlugin {
     }
 
     @Override
-    public void append() {
+    public void append(ThreadLocalCache threadLocalCache) {
         if (sort!=null){
             if (StringUtils.isNotBlank(sortName))searchSourceBuilder.sort(sortName,sort);
             else searchSourceBuilder.sort(sortName);
