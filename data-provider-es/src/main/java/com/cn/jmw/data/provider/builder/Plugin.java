@@ -10,7 +10,7 @@ public enum Plugin {
 
     ES_REQUEST_PARAM,
     SEARCH_REQUEST,
-
+    DATA_FRAME,
     SEARCH_RESPONSE,
     SEARCH_SOURCE_BUILDER;
 }
