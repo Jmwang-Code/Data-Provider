@@ -58,6 +58,7 @@ public class Manager {
      * objectObjectHashMap.put("model", "indexId");//index-id
      * objectObjectHashMap.put("id", "-43_74MBeofnJbrlVzm1");
      */
+
     public static void main(String[] args) {
         Manager builderPatternManager = new Manager(EsRequestParam.builder()
                 .size(3)
