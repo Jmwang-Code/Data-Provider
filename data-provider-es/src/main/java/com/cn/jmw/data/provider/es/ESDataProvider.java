@@ -8,7 +8,6 @@ import com.cn.jmw.data.provider.base.entity.db.ExecutionParam;
 import com.cn.jmw.data.provider.base.entity.db.UUIDGenerator;
 import com.cn.jmw.data.provider.base.factory.DataProviderAbstractDefaultFactory;
 import com.cn.jmw.data.provider.builder.Manager;
-import com.cn.jmw.data.provider.es.elasticsearch.EsInfoProcessor;
 import com.cn.jmw.data.provider.es.elasticsearch.Mode;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import com.cn.jmw.data.provider.es.entity.ResponseData;
