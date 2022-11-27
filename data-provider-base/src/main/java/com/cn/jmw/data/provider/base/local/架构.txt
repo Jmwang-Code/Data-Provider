@@ -1,0 +1,24 @@
+/**
+ * @author jmw
+ * @Description 管理器 -> 解析器 -> 优化器 -> 过期判断器 -> 执行器
+ * @date 2022年11月26日 17:01
+ * @Version 1.0
+ *
+ *      Parser -> Analysis of non-relational database,First you need an intermediate,
+ * Such as "DATAFRAME".Finally parse the "DATAFRAME" into a "ResultSet" object.
+ * Parser only focus on parsing.
+ *
+ *      Actuator -> Open the connection between persistent and db files,For example,
+ * adding,deleting,modifying,checking,table control statement.
+ * Executors only focus on executing
+ *
+ *      Manager(Provider) -> Provide external API and manage persistence.
+ *
+ *      Expired judge -> First you need to maintain an expiration table,
+ * periodically check expiration fields.The API interface needs to provide an absolute IP.
+ *
+ *      Optimizer -> Original library, write library, read library, enable optimization,
+ * split the original library into writing library and reading library.
+ * Timing synchronization (simple timing synchronization and execution forced synchronization)
+ *
+ */
