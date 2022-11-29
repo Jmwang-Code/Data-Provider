@@ -2,6 +2,7 @@ package com.cn.jmw.data.provider.builder.plugins.plu.sort;
 
 import com.cn.jmw.data.provider.ThreadLocalCache;
 import com.cn.jmw.data.provider.builder.Plugin;
+import com.cn.jmw.data.provider.builder.en.Sort;
 import com.cn.jmw.data.provider.builder.plugins.plu.SortPlugin;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import org.apache.commons.lang3.StringUtils;
@@ -44,22 +45,6 @@ public class Ascending extends SortPlugin {
 
 }
 
-enum Sort {
-    ASC("ASC"),
-    DESC("DESC");
-    static Map<String,SortOrder> map = new HashMap();
-
-    static {
-      map.put("ASC",SortOrder.ASC);
-      map.put("DESC",SortOrder.DESC);
-    }
-    private String string;
-
-    Sort(String string){
-        this.string = string;
-    }
-
-    public static SortOrder StringToSort(String string){
-        return map.get(string);
-    }
-}
+//enum Sort {
+//
+//}
