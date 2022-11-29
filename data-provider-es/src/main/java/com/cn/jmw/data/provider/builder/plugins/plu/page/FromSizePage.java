@@ -4,6 +4,7 @@ import com.cn.jmw.data.provider.builder.Plugin;
 import com.cn.jmw.data.provider.ThreadLocalCache;
 import com.cn.jmw.data.provider.builder.plugins.plu.PagePlugin;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
+import lombok.Builder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 
@@ -19,7 +20,6 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
  * @date 2022年11月09日 17:36
  * @Version 1.0
  */
-//@SuperBuilder
 public class FromSizePage extends PagePlugin {
 
     private int from = -1;
