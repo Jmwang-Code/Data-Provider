@@ -4,6 +4,9 @@ package com.cn.jmw.data.provider.builder;
 import com.cn.jmw.data.provider.ThreadLocalCache;
 import com.cn.jmw.data.provider.base.entity.db.Dataframe;
 import com.cn.jmw.data.provider.builder.chain.Builder;
+import com.cn.jmw.data.provider.builder.en.Page;
+import com.cn.jmw.data.provider.builder.en.Query;
+import com.cn.jmw.data.provider.builder.en.Sort;
 import com.cn.jmw.data.provider.builder.plugins.plu.Analysis;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import org.elasticsearch.action.search.SearchRequest;
@@ -39,8 +42,11 @@ public class Manager {
                 .put(Plugin.SEARCH_SOURCE_BUILDER, this.searchSourceBuilder)
                 .build();
         ElasticSearchBuilder elasticSearchBuilder = new ElasticSearchBuilder(threadLocalCache);
-        ElasticSearchPluginManager vegMeal = elasticSearchBuilder.prepareVegMeal();
-        vegMeal.showItems(threadLocalCache);
+        SearchResponse build = elasticSearchBuilder
+                .setPage(Page.SCROLL_PAGE)
+                .setSort(Sort.ASC)
+                .setQuery(Query.INDEX_ALL)
+                .build();
         Analysis.append(threadLocalCache);
         dataframe = (Dataframe)threadLocalCache.get(Plugin.DATA_FRAME);
         threadLocalCache.close();
@@ -79,10 +85,15 @@ public class Manager {
                 .put(Plugin.SEARCH_SOURCE_BUILDER, builderPatternManager.searchSourceBuilder)
                 .build();
         ElasticSearchBuilder elasticSearchBuilder = new ElasticSearchBuilder(threadLocalCache);
-        ElasticSearchPluginManager vegMeal = elasticSearchBuilder.prepareVegMeal();
-        vegMeal.showItems(threadLocalCache);
+        SearchResponse build = elasticSearchBuilder
+                .setPage(Page.SCROLL_PAGE)
+                .setSort(Sort.ASC)
+                .setQuery(Query.INDEX_ALL)
+                .build();
+        Analysis.append(threadLocalCache);
+        Dataframe dataframe = (Dataframe)threadLocalCache.get(Plugin.DATA_FRAME);
         threadLocalCache.close();
-
+        System.out.println(dataframe);
     }
 
 }
