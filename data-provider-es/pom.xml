@@ -4,15 +4,51 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>data-provider</artifactId>
-        <groupId>com.cn.jmw</groupId>
+        <groupId>io.github.jmwang-code</groupId>
         <version>1.0.RELEASE</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
+
+<!--    <scm>-->
+<!--        <connection>scm:git:git://github.com/Jmwang-Code/Data-Provider.git</connection>-->
+<!--        <developerConnection>scm:git:ssh://github.com:Jmwang-Code/Data-Provider.git</developerConnection>-->
+<!--        <url>http://github.com/Jmwang-Code/Data-Provider/tree/master</url>-->
+<!--    </scm>-->
+
+<!--    <distributionManagement>-->
+<!--        <snapshotRepository>-->
+<!--            <id>sonatype</id>-->
+<!--            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>-->
+<!--        </snapshotRepository>-->
+<!--        <repository>-->
+<!--            <id>sonatype</id>-->
+<!--            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+<!--        </repository>-->
+<!--    </distributionManagement>-->
+<!--    <name>${project.groupId}:${project.artifactId}</name>-->
+<!--    <description>data-provider</description>-->
+<!--    <url>https://github.com/Jmwang-Code/Data-Provider</url>-->
+<!--    <licenses>-->
+<!--        <license>-->
+<!--            <name>The Apache License, Version 2.0</name>-->
+<!--            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>-->
+<!--        </license>-->
+<!--    </licenses>-->
+
+<!--    <developers>-->
+<!--        <developer>-->
+<!--            <name>Jmwang-code</name>-->
+<!--            <email>yizhixiaoxiaogou@qq.com</email>-->
+<!--            <organization>Sonatype</organization>-->
+<!--            <organizationUrl>https://blog.csdn.net/jj89929665?type=blog</organizationUrl>-->
+<!--        </developer>-->
+<!--    </developers>-->
 
     <artifactId>data-provider-es</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.cn.jmw</groupId>
+            <groupId>io.github.jmwang-code</groupId>
             <artifactId>data-provider-base</artifactId>
             <version>1.0.RELEASE</version>
         </dependency>
@@ -86,4 +122,67 @@
             <url>https://www.jmwang-code.top/repository/my-maven/</url>
         </repository>
     </distributionManagement>
+
+<!--    <build>-->
+<!--        <pluginManagement>-->
+<!--            <plugins>-->
+<!--                <plugin>-->
+<!--                    <groupId>org.sonatype.plugins</groupId>-->
+<!--                    <artifactId>nexus-staging-maven-plugin</artifactId>-->
+<!--                    <version>1.6.7</version>-->
+<!--                    <extensions>true</extensions>-->
+<!--                    <configuration>-->
+<!--                        <serverId>ossrh</serverId>-->
+<!--                        <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>-->
+<!--                        <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-source-plugin</artifactId>-->
+<!--                    <version>2.2.1</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <id>attach-sources</id>-->
+<!--                            <goals>-->
+<!--                                <goal>jar-no-fork</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--                    <version>2.9.1</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <id>attach-javadocs</id>-->
+<!--                            <goals>-->
+<!--                                <goal>jar</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-gpg-plugin</artifactId>-->
+<!--                    <version>1.6</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <id>sign-artifacts</id>-->
+<!--                            <phase>verify</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>sign</goal>-->
+<!--                            </goals>-->
+<!--                            <configuration>-->
+<!--                                <keyname>0xCAE42053</keyname>-->
+<!--                                <passphraseServerId>0xCAE42053</passphraseServerId>-->
+<!--                            </configuration>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
+<!--            </plugins>-->
+<!--        </pluginManagement>-->
+<!--    </build>-->
+
 </project>

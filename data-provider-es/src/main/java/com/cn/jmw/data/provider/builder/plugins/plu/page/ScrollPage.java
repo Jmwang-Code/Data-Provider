@@ -5,7 +5,7 @@ import com.cn.jmw.data.provider.builder.Plugin;
 import com.cn.jmw.data.provider.builder.plugins.plu.PagePlugin;
 import com.cn.jmw.data.provider.es.entity.EsRequestParam;
 import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.core.TimeValue;
 import org.elasticsearch.search.Scroll;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 

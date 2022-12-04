@@ -10,11 +10,13 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.stream.Collectors;
@@ -150,27 +152,45 @@ public class AdapterFactory {
     private static Map<String, Map<String, String>> loadYml(String file) {
         try (InputStream inputStream = AdapterFactory.class.getResourceAsStream(file)) {
             Yaml yaml = new Yaml();
-            return yaml.loadAs(inputStream, HashMap.class);
+                return yaml.loadAs(inputStream, HashMap.class);
         } catch (Exception e) {
             log.error(String.valueOf(e));
         }
         return null;
     }
 
+
+//    private static Map<String, Map<String, String>> loadYml1(String file) {
+//        try (InputStream inputStream = AdapterFactory.class.getResourceAsStream(file)) {
+//            Yaml yaml = new Yaml();
+//            return (Map<String, Map<String, String>>)yaml.load(inputStream);
+//        } catch (Exception e) {
+//            log.error(String.valueOf(e));
+//        }
+//        return null;
+//    }
+//
+//
+//    public static void main(String[] args) {
+//        Map<String, Map<String, String>> stringMapMap = loadYml("/jdbc-driver.yml");
+//        Map<String, Map<String, String>> stringMapMap1 = loadYml1("/jdbc-driver.yml");
+//        System.out.println(stringMapMap1);
+//    }
+
     /**
      * @Author jmw
      * @Description 通过File类型加载成驱动文件
      * @Date 17:20 2022/10/9
      */
-    public static Map<String, Map<String, String>> loadYml(File file) {
-        try (InputStream inputStream = new FileInputStream(file)) {
-            Yaml yaml = new Yaml();
-            return yaml.loadAs(inputStream, HashMap.class);
-        } catch (Exception e) {
-            log.error(String.valueOf(e));
-        }
-        return null;
-    }
+//    public static Map<String, Map<String, String>> loadYml(File file) {
+//        try (InputStream inputStream = new FileInputStream(file)) {
+//            Yaml yaml = new Yaml();
+//            return yaml.loadAs(inputStream, HashMap.class);
+//        } catch (Exception e) {
+//            log.error(String.valueOf(e));
+//        }
+//        return null;
+//    }
 
     /**
      * @Author jmw
